@@ -1,20 +1,3 @@
-{
-    "01d": "clear-day",
-    "01n": "clear-night",
-    "02d": "partly-cloudy-day",
-    "02n": "partly-cloudy-night",
-    "03d": "cloudy",
-    "03n": "cloudy",
-    "04d": "overcast-day",
-    "04n": "overcast-night",
-    "09d": "partly-cloudy-day-drizzle",
-    "09n": "partly-cloudy-night-drizzle",
-    "10d": "partly-cloudy-day-rain",
-    "10n": "partly-cloudy-night-rain",
-    "11d": "thunderstorms-day",
-    "11n": "thunderstorms-night",
-    "13d": "partly-cloudy-day-snow",
-    "13n": "partly-cloudy-night-snow",
-    "50d": "mist",
-    "50n": "mist"
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:042ef5c1d672ba727a171123a10cf13da51d0a63820c33a990ba7b69c50ad76f
+size 573
