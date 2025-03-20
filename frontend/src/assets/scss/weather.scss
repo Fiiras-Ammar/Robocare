@@ -1,0 +1,166 @@
+.mod-weather {
+    background-color: #eae6e2;
+    color: #444e54;
+    padding: 30px 0;
+    margin-bottom: 30px;
+
+    hr {
+        margin: 48px;
+        border: 1px solid #686d80;
+    }
+
+    .m-center {
+        align-items: center;
+    }
+
+    .search-form {
+        margin: 20px 25px;
+        padding: 5px 10px;
+        width: 300px;
+        border-radius: 5px;
+        border: 2px solid #332b1d;
+        font-family: 'Oxygen Mono', monospace;
+        font-size: 12px;
+    }
+
+    .m-current {
+        justify-content: center;
+        position: relative;
+    }
+
+    .measurements {
+        position: relative;
+    }
+
+    .m-image {
+        width: 75px;
+        height: 75px;
+        position: absolute;
+        right: 0;
+        bottom: 10px;
+    }
+
+    .current-weather {
+        margin-top: 50px;
+    }
+
+    .city-title {
+        max-width: 300px;
+        font-size: 32px;
+        font-weight: bold;
+    }
+
+
+
+    .todays-info {
+        margin: 15px 0;
+    }
+
+    .side-info {
+        position: relative;
+
+        @media (min-width: 768px) {
+            justify-content: end;
+        }
+    }
+
+    p,
+    ul {
+        font-family: 'Oxygen Mono', monospace;
+        font-size: 15px;
+        padding: 0;
+    }
+
+    li {
+        list-style: none;
+    }
+
+    .week-forecast {
+        text-align: center;
+        font-family: 'Inter', sans-serif;
+        justify-content: center;
+    }
+
+    .weather {
+        margin-top: 2px;
+        margin-bottom: 6px;
+        font-size: 14px;
+    }
+
+    h2 {
+        font-size: 24px;
+
+        @media (min-width: 768px) {
+            font-size: 48px;
+        }
+    }
+
+    h3 {
+        font-size: 22px;
+        margin-bottom: -18px;
+    }
+
+    footer {
+        position: relative;
+        bottom: -100px;
+        text-align: center;
+    }
+
+    a {
+        text-decoration: none;
+        color: #0a95c9;
+    }
+
+    a:hover {
+        color: #007bff;
+    }
+}
+
+.card-wether-header {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.card-wether-date {
+    font-size: 12px !important;
+    color: #6f9d2f;
+    margin-left: auto;
+}
+
+.card-wether-body-span {
+    font-size: 15px !important;
+}
+
+.card-wether-img {
+    max-width: 100px;
+}
+
+.temp-title {
+    font-size: 30px;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+
+    @media (min-width: 768px) {
+        font-size: 38px;
+    }
+}
+
+.temp-span-max {
+    color: #ff2121 !important;
+}
+
+.temp-span-min {
+    color: #1883ff !important;
+}
+
+.temp-chart {
+    position: relative;
+    height: 300px;
+}
+
+.owl-item {
+    >.item {
+        padding-left: 1px;
+        padding-right: 1px;
+    }
+}

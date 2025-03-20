@@ -1,0 +1,178 @@
+.histogram {
+    user-select: none;
+    margin-bottom: 40px;
+
+    &.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    .histogram-container {
+        &:hover {
+            cursor: pointer;
+        }
+
+        overflow: visible;
+    }
+
+    select,
+    input {
+        height: auto;
+        padding: 4px;
+    }
+
+    .min-max {
+        display: inline;
+        width: 92px;
+        margin-right: 12px;
+    }
+
+    .axis {
+        shape-rendering: crispEdges;
+    }
+
+    .x.axis line {
+        // display: none;
+    }
+
+    .x.axis .minor {
+        stroke-opacity: .5;
+    }
+
+    .x.axis path {
+        display: none;
+    }
+
+    .slider-line {
+        stroke-width: 4;
+        opacity: 0.4;
+
+        &:hover {
+            cursor: ew-resize;
+        }
+    }
+}
+
+.theme-stroke-primary {
+    stroke: #85B02C;
+}
+
+// .histogram {
+//     width: 100%;
+//   }
+.histogram-load {
+    height: 100px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.histogram-silder-label {
+    color: #ffffff;
+    background-color: #85B02C;
+    border-radius: 3px;
+    padding: 3px 8px;
+    display: inline-block; /* Added for Firefox */
+    min-width: 30px; /* Added for consistency */
+}
+
+.histogram-slider-tick {
+    height: 12px;
+    width: 1px;
+    position: absolute;
+    pointer-events: none;
+    background-color: #85B02C;
+    top: -32px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.histogram-slider-arrow {
+    bottom: 100%;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #85B02C transparent; /* Fixed border colors */
+    height: 0px;
+    width: 0px;
+    position: absolute;
+    pointer-events: none;
+    top: -9px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.nav-tabs-histogram .nav-item .navlink.active {
+    color: #000000 !important;
+    background-color: #d4d4d4;
+}
+
+.nav-tabs-histogram>li>a {
+    font-size: 12px;
+    color: #000000 !important;
+    font-weight: 500 !important;
+}
+
+.nav-tabs-histogram .nav-item .navlink {
+    border-radius: 1px;
+    border: 1px solid #d4d4d4
+}
+
+.nav-tabs-histogram .nav-item .navlink:hover {
+    border-radius: 1px;
+    border: 1px solid #d4d4d4
+}
+
+.histogram-productivity {
+    user-select: none;
+    margin-bottom: 15px;
+
+    &.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    .histogram-container {
+        &:hover {
+            cursor: pointer;
+        }
+
+        overflow: visible;
+    }
+
+    select,
+    input {
+        height: auto;
+        padding: 4px;
+    }
+
+    .min-max {
+        display: inline;
+        width: 92px;
+        margin-right: 12px;
+    }
+
+    .axis {
+        shape-rendering: crispEdges;
+    }
+
+    .x.axis line {
+        // display: none;
+    }
+
+    .x.axis .minor {
+        stroke-opacity: .5;
+    }
+
+    .x.axis path {
+        display: none;
+    }
+
+    .slider-line {
+        stroke-width: 4;
+        opacity: 0.4;
+
+        &:hover {
+            cursor: ew-resize;
+        }
+    }
+}

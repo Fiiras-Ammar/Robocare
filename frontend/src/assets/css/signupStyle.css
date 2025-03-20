@@ -1,0 +1,44 @@
+input {
+    border: none;
+}
+
+input:focus {
+    outline: none;
+}
+
+.label-signupCheckbox {
+    font-weight: 500;
+}
+
+.signup-checkbox {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+.signin-link {
+    color: #6f9d2f;
+    font-weight: 600;
+}
+.signin-link:hover {
+    color: #4f9a44;
+  
+}
+.terms-link {
+    color: #6f9d2f;
+    font-weight: 500;
+    
+}
+.sign-up-container{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.PhoneInput{
+    display: flex!important;
+}
+.sign-up-input > label{
+    transform: translate(14px, 9px) scale(1);
+}
+.sign-up-input > label[data-shrink="true"]{
+    transform: translate(14px, -9px) scale(0.75);
+ 
+}

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="24b6ab2d-b724-4379-8289-e57b5e0948cc" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/mesurements/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/mesurements/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mesurements/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/mesurements/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mesurements/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/mesurements/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mesurements/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/mesurements/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mesurements/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/mesurements/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mesurements/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/mesurements/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2rcZXAhISNOduRgjcs7TX18wnyR" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.0013_alter_taskimage_image.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.models.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.views.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
+    &quot;django.template.preview.state&quot;: &quot;SHOW_EDITOR_AND_PREVIEW&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;GDD/Modify&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-PY-241.15989.155" />
+        <option value="bundled-python-sdk-babbdf50b680-7c6932dee5e4-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-241.15989.155" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="24b6ab2d-b724-4379-8289-e57b5e0948cc" name="Changes" comment="" />
+      <created>1736861702317</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1736861702317</updated>
+      <workItem from="1736861708988" duration="8610000" />
+      <workItem from="1736926556911" duration="10950000" />
+      <workItem from="1737011163034" duration="9897000" />
+      <workItem from="1737106881516" duration="219000" />
+      <workItem from="1737107789380" duration="7091000" />
+      <workItem from="1737357059348" duration="45713000" />
+      <workItem from="1737529778623" duration="15967000" />
+      <workItem from="1737616303965" duration="14385000" />
+      <workItem from="1737966464241" duration="23881000" />
+      <workItem from="1738307641304" duration="9779000" />
+      <workItem from="1738566162861" duration="12064000" />
+      <workItem from="1738653244289" duration="8594000" />
+      <workItem from="1738739187515" duration="14971000" />
+      <workItem from="1738826983921" duration="2877000" />
+      <workItem from="1738831508205" duration="22922000" />
+      <workItem from="1739173372907" duration="27997000" />
+      <workItem from="1739344742266" duration="11422000" />
+      <workItem from="1739388084227" duration="15014000" />
+      <workItem from="1739518176457" duration="6013000" />
+      <workItem from="1739525664634" duration="9870000" />
+      <workItem from="1739776429753" duration="29353000" />
+      <workItem from="1740037272595" duration="12295000" />
+      <workItem from="1740123122302" duration="17510000" />
+      <workItem from="1740380879499" duration="18473000" />
+      <workItem from="1740469601578" duration="7248000" />
+      <workItem from="1740486145313" duration="12200000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/mesurements/views.py</url>
+          <line>5900</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/backend$models.coverage" NAME="models Coverage Results" MODIFIED="1737717022839" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mesurements" />
+    <SUITE FILE_PATH="coverage/backend$0013_alter_taskimage_image.coverage" NAME="0013_alter_taskimage_image Coverage Results" MODIFIED="1737717047895" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mesurements/migrations" />
+    <SUITE FILE_PATH="coverage/backend$views.coverage" NAME="views Coverage Results" MODIFIED="1737716918475" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mesurements" />
+  </component>
+</project>

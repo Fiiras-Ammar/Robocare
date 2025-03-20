@@ -1,0 +1,116 @@
+.fc-button-primary {
+  background-color: #6f9d2f !important;
+  border: 1px solid #979797 !important;
+}
+
+.fc-h-event {
+  background-color: transparent;
+  border: 0;
+}
+
+.mod-calendar {
+  background-color: white;
+  border-radius: 5px;
+  min-width: 800px;
+  overflow-x: auto;
+}
+
+.mod-calendar a {
+  text-decoration: none;
+  color: #656363 !important;
+}
+
+.fc .fc-toolbar-title {
+  font-size: 28px !important;
+  font-weight: bold;
+  text-align: center;
+}
+
+.fc-direction-ltr .fc-toolbar > * > :not(:first-child) {
+  margin-left: 0.75em !important;
+}
+
+.fc-direction-ltr .fc-button-group {
+  font-size: 14px !important;
+}
+
+.fc .fc-col-header-cell-cushion {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.fc .fc-timegrid-axis-cushion,
+.fc .fc-timegrid-slot-label-cushion {
+  font-size: 14px;
+}
+
+.fc {
+  min-width: 800px;
+}
+
+.fc .fc-daygrid-day {
+  min-height: 100px;
+}
+
+.fc-event-title {
+  font-size: 12px !important;
+}
+.calendar-wrapper {
+  overflow-x: auto;
+  max-width: 100%;
+}
+.fc-event {
+  transition: transform 0.2s ease;
+}
+
+.fc-event:active {
+  transform: scale(0.95);
+}
+@media (max-width: 768px) {
+  .fc-day-number {
+    font-size: 18px;
+  }
+
+  .fc-day-header {
+    font-size: 16px;
+  }
+
+  .fc-button {
+    font-size: 14px;
+    padding: 6px 8px;
+  }
+
+  .fc-toolbar h2 {
+    font-size: 20px;
+  }
+
+  .fc-event {
+    padding: 2px;
+  }
+
+  .fc-event-title {
+    font-size: 10px !important;
+  }
+}
+@media (max-width: 768px) {
+  .fc-day:active {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  
+}
+@media (max-width: 768px) {
+  .recording {
+    width: 190px !important;
+  }
+  .audio-recorder.recording .audio-recorder-mic{
+    height:13px !important;
+  }
+  .audio-recorder-timer, .audio-recorder-status{
+    margin-left:0px !important;
+    font-size:12px !important;
+  }
+  .audio-recorder-options{
+    width: 13px!important;
+  }
+
+}

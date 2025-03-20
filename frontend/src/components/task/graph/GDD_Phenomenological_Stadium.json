@@ -1,0 +1,109 @@
+{
+  "1310a36d-fdb9-4136-812e-187b659cccde": [
+    {"name": "Dormancy", "min": 0, "max": 0, "color": "#A8D8B9"},
+    {"name": "Budding", "min": 0, "max": 100, "color": "#88B04B"},
+    {"name": "Initial vegetative development", "min": 100, "max": 300, "color": "#5A9B32"},
+    {"name": "Flowering", "min": 300, "max": 400, "color": "#3C6D28"},
+    {"name": "Development of young fruits", "min": 400, "max": 600, "color": "#A2D59B"},
+    {"name": "Nouaison", "min": 600, "max": 700, "color": "#72B94C"},
+    {"name": "Fruit development", "min": 700, "max": 1600, "color": "#4C9C3D"},
+    {"name": "Fruit ripening", "min": 1600, "max": 2400, "color": "#9CEAB3"},
+    {"name": "Harvest", "min": 2400, "max": 3000, "color": "#008000"}
+  ],
+  "11667744-3f77-461c-9491-03b0eafdf1c1": [
+    {"name": "Dormancy", "min": 0, "max": 0, "color": "#A8D8B9"},
+    {"name": "Budding", "min": 0, "max": 100, "color": "#88B04B"},
+    {"name": "Initial vegetative development", "min": 100, "max": 300, "color": "#5A9B32"},
+    {"name": "Flowering", "min": 300, "max": 400, "color": "#3C6D28"},
+    {"name": "Development of young fruits", "min": 400, "max": 600, "color": "#A2D59B"},
+    {"name": "Nouaison", "min": 600, "max": 700, "color": "#72B94C"},
+    {"name": "Fruit development", "min": 700, "max": 1600, "color": "#4C9C3D"},
+    {"name": "Fruit ripening", "min": 1600, "max": 2400, "color": "#9CEAB3"},
+    {"name": "Harvest", "min": 2400, "max": 3000, "color": "#008000"}
+  ],
+  "044fd8d9-cf55-401c-b725-b9be64315189": [
+    {"name": "Dormancy", "min": 0, "max": 0, "color": "#A8D8B9"},
+    {"name": "Budding", "min": 0, "max": 100, "color": "#88B04B"},
+    {"name": "Initial vegetative development", "min": 100, "max": 300, "color": "#5A9B32"},
+    {"name": "Flowering", "min": 300, "max": 400, "color": "#3C6D28"},
+    {"name": "Development of young fruits", "min": 400, "max": 600, "color": "#A2D59B"},
+    {"name": "Nouaison", "min": 600, "max": 700, "color": "#72B94C"},
+    {"name": "Fruit development", "min": 700, "max": 1600, "color": "#4C9C3D"},
+    {"name": "Fruit ripening", "min": 1600, "max": 2400, "color": "#9CEAB3"},
+    {"name": "Harvest", "min": 2400, "max": 3000, "color": "#008000"}
+  ],
+
+
+
+
+
+
+
+
+
+  "7bd57d1b-428f-4f09-b7c0-45ef023eb110": [
+    {"name": "Dormancy", "min": 0, "max": 0, "color": "#A8D8B9"},
+    {"name": "Budding", "min": 0, "max": 300, "color": "#88B04B"},
+    {"name": "Floral initiation", "min": 300, "max": 600, "color": "#5A9B32"},
+    {"name": "Intensive growth of branches – flowering", "min": 600, "max": 800, "color": "#3C6D28"},
+    {"name": "Fruit set – floral induction", "min": 800, "max": 1000, "color": "#A2D59B"},
+    {"name": "Fruit growth – hardening of pits", "min": 1000, "max": 1200, "color": "#72B94C"},
+    {"name": "Intensive branch growth – Fruit growth", "min": 1200, "max": 1400, "color": "#4C9C3D"},
+    {"name": "Fruit growth", "min": 1400, "max": 1600, "color": "#9CEAB3"},
+    {"name": "Fruit ripening", "min": 1600, "max": 2200, "color": "#B7E7C8"},
+    {"name": "Harvest", "min": 2200, "max": 3100, "color": "#008000"}
+  ],
+  "a17a408e-d234-4aad-bf28-fe5c25e2eeb8": [
+    {"name": "Dormancy", "min": 0, "max": 0, "color": "#A8D8B9"},
+    {"name": "Budding", "min": 0, "max": 300, "color": "#88B04B"},
+    {"name": "Floral initiation", "min": 300, "max": 600, "color": "#5A9B32"},
+    {"name": "Intensive growth of branches – flowering", "min": 600, "max": 800, "color": "#3C6D28"},
+    {"name": "Fruit set – floral induction", "min": 800, "max": 1000, "color": "#A2D59B"},
+    {"name": "Fruit growth – hardening of pits", "min": 1000, "max": 1200, "color": "#72B94C"},
+    {"name": "Intensive branch growth – Fruit growth", "min": 1200, "max": 1400, "color": "#4C9C3D"},
+    {"name": "Fruit growth", "min": 1400, "max": 1600, "color": "#9CEAB3"},
+    {"name": "Fruit ripening", "min": 1600, "max": 2200, "color": "#B7E7C8"},
+    {"name": "Harvest", "min": 2200, "max": 3100, "color": "#008000"}
+  ],
+  "0c838d48-b13c-4a8e-be50-ba10d25b595c": [
+    {"name": "Dormancy", "min": 0, "max": 0, "color": "#A8D8B9"},
+    {"name": "Budding", "min": 0, "max": 300, "color": "#88B04B"},
+    {"name": "Floral initiation", "min": 300, "max": 600, "color": "#5A9B32"},
+    {"name": "Intensive growth of branches – flowering", "min": 600, "max": 800, "color": "#3C6D28"},
+    {"name": "Fruit set – floral induction", "min": 800, "max": 1000, "color": "#A2D59B"},
+    {"name": "Fruit growth – hardening of pits", "min": 1000, "max": 1200, "color": "#72B94C"},
+    {"name": "Intensive branch growth – Fruit growth", "min": 1200, "max": 1400, "color": "#4C9C3D"},
+    {"name": "Fruit growth", "min": 1400, "max": 1600, "color": "#9CEAB3"},
+    {"name": "Fruit ripening", "min": 1600, "max": 2200, "color": "#B7E7C8"},
+    {"name": "Harvest", "min": 2200, "max": 3100, "color": "#008000"}
+  ],
+
+
+  "047088cd-3647-4ae5-b37f-19b19af42aaf": [
+    {"name": "Dormancy", "min": 0, "max": 0, "color": "#A8D8B9"},
+    {"name": "BBCH 0 :Germination, lifting", "min": 0, "max": 80, "color": "#88B04B"},
+    {"name": "BBCH 1 :Leaf development", "min": 80, "max": 150, "color": "#5A9B32"},
+    {"name": "BBCH 2 :Tillering", "min": 150, "max": 500, "color": "#3C6D28"},
+    {"name": "BBCH 3 :Elongation of the main stem", "min": 500, "max": 1000, "color": "#A2D59B"},
+    {"name": "BBCH 4 :Swelling of the ear or panicle", "min": 1000, "max": 1500, "color": "#72B94C"},
+    {"name": "BBCH 5 :Inflorescence emergence or earing", "min": 1500, "max": 2000, "color": "#4C9C3D"},
+    {"name": "BBCH 6 :Flowering, anthesis", "min": 2000, "max": 2300, "color": "#9CEAB3"},
+    {"name": "BBCH 7 :Seed development", "min": 2300, "max": 2700, "color": "#B7E7C8"},
+    {"name": "BBCH 8: Seed maturation", "min": 2700, "max": 3100, "color": "#008000"},
+    {"name": "BBCH 9: Senescence", "min": 3100, "max": 3500, "color": "#5A9B32"}
+  ],
+  "e0af04c8-b518-460a-902f-1f42e4b8a449": [
+    {"name": "Dormancy", "min": 0, "max": 0, "color": "#A8D8B9"},
+    {"name": "BBCH 0 :Germination, lifting", "min": 0, "max": 80, "color": "#88B04B"},
+    {"name": "BBCH 1 :Leaf development", "min": 80, "max": 150, "color": "#5A9B32"},
+    {"name": "BBCH 2 :Tillering", "min": 150, "max": 500, "color": "#3C6D28"},
+    {"name": "BBCH 3 :Elongation of the main stem", "min": 500, "max": 1000, "color": "#A2D59B"},
+    {"name": "BBCH 4 :Swelling of the ear or panicle", "min": 1000, "max": 1500, "color": "#72B94C"},
+    {"name": "BBCH 5 :Inflorescence emergence or earing", "min": 1500, "max": 2000, "color": "#4C9C3D"},
+    {"name": "BBCH 6 :Flowering, anthesis", "min": 2000, "max": 2300, "color": "#9CEAB3"},
+    {"name": "BBCH 7 :Seed development", "min": 2300, "max": 2700, "color": "#B7E7C8"},
+    {"name": "BBCH 8: Seed maturation", "min": 2700, "max": 3100, "color": "#008000"},
+    {"name": "BBCH 9: Senescence", "min": 3100, "max": 3500, "color": "#5A9B32"}
+  ]
+
+}

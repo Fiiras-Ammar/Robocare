@@ -1,0 +1,24 @@
+.mod-cards {
+    .m-select {
+        margin: 0;
+    }
+
+    .row {
+        max-width: 100%;
+        margin: auto;
+    }
+}
+
+.language-dropdown {
+    min-width: 100px !important;
+    cursor: pointer;
+}
+
+.lang-item:active {
+    background-color: #e9ecef !important;
+    color: #000 !important;
+}
+
+
+
+

@@ -1,0 +1,27 @@
+.mod-profile {
+    > .m-wrapper {
+        padding: 10px;
+        background-color: white;
+
+        @media screen and (min-width: 764px) {
+            padding: 30px;
+        }
+
+        > .m-headline {
+            > h2 {
+            }
+        }
+
+        > .m-content {
+        }
+
+        > .m-buttons {
+            flex-direction: column;
+            row-gap: 20px;
+
+            > .m-button {
+                text-align: center;
+            }
+        }
+    }
+}

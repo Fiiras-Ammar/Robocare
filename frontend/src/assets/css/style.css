@@ -1,0 +1,119 @@
+#root {
+  height: 100vh;
+  /* display: flex; */
+}
+body {
+  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif !important;
+  /* overflow: visible !important; */
+  padding: 0px !important;
+}
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.loading-green {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999999;
+  /* background: #ffffffb0  url("../images/Spinner.svg") no-repeat scroll center center; */
+  background: #ffffff url("../images/Spinner-green.svg") no-repeat scroll center
+    center;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+.loading-white {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999999;
+  /* background: #ffffffb0  url("../images/Spinner.svg") no-repeat scroll center center; */
+  background: #7575758f url("../images/Spinner-white.svg") no-repeat scroll
+    center center;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.loading-div {
+  background: #ffffff url("../images/Spinner-green.svg") no-repeat scroll center
+    center;
+  background-size: 100% 100%;
+  /* Set background size to full width and height */
+  width: 100px;
+  /* Set the desired width */
+  height: 100px;
+}
+
+.loading.active {
+  display: block !important;
+}
+
+.no-padding-right {
+  padding-right: 0px !important;
+}
+
+.no-padding {
+  padding: 0px !important;
+}
+
+.no-padding-left {
+  padding-left: 0px !important;
+}
+
+@media (min-width: 600px) {
+  .MuiToolbar-root.MuiToolbar-gutters.MuiToolbar-regular {
+    min-height: 80px;
+  }
+}
+
+/* 
+.MuiFormLabel-root {
+    background: #ffffff !important
+} */
+
+/* hr {
+    margin: 10px 0!important;
+} */
+
+.custom-modal {
+  max-height: calc(100% - 30px);
+  overflow-y: auto;
+  /* width: 50%!important; */
+}
+
+@media (max-width: 991.98px) {
+  .custom-modal {
+    width: 70% !important;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .custom-modal {
+    width: 90% !important;
+  }
+}
+
+/* For WebKit browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #898989;
+  -webkit-border-radius: 25px;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #e7e7e7;
+  border-radius: 3px;
+  /* Change this to your desired track color */
+}
+
+.mr-1 {
+  margin-right: 1rem;
+}

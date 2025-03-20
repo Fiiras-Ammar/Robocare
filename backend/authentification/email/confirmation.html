@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Robocare - Account Created</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Roboto&display=swap"
+          rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Fira Code', monospace;
+            font-family: 'Roboto', sans-serif;
+            color: #42505C;
+        }
+
+        .mod-account-created {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .m-logo,
+        .m-image {
+            max-width: 100%;
+        }
+
+        .m-table {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .m-right {
+            text-align: center;
+        }
+
+        .m-footer {
+            text-align: center;
+            padding-top: 30px;
+        }
+
+        .m-button {
+            background-color: #4f9a44;
+            padding: 10px 30px;
+            color: white;
+            border: 0;
+            border-radius: 0;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        @media only screen and (max-width:768px) {
+
+            .m-headline {
+                font-size: 34px;
+            }
+
+            .m-mobile {
+                display: block;
+                text-align: center;
+                margin-top: 30px;
+            }
+
+            .m-desktop {
+                display: none;
+            }
+        }
+
+        @media only screen and (min-width:768px) {
+
+            .m-headline {
+                font-size: 54px;
+            }
+
+            .m-mobile {
+                display: none;
+            }
+
+            .m-desktop {
+                display: block;
+            }
+        }
+
+
+        .m-headline {
+            font-weight: bold;
+        }
+
+        .m-text {
+            font-size: 14px;
+        }
+
+        @media only screen and (max-width:768px) {
+            .m-image {
+                width: 300px;
+            }
+
+            .m-logo {
+                width: 150px;
+            }
+        }
+
+        @media only screen and (min-width:1024px) {
+            .m-image {
+                width: 350px;
+            }
+
+            .m-logo {
+                width: 200px;
+            }
+
+            .m-left {
+                width: 50%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mod-account-created">
+
+        <table class="m-table">
+            <tr>
+                <td colspan="2">
+                    <img src="https://app.satellite.robocare.tn/static/media/logo_login.f5c8e05f8a0f94e38c23.png"
+                         alt="robocare logo"
+                         class="m-logo"
+                         width="150px" />
+                </td>
+            </tr>
+            <tr>
+                <td class="m-left">
+                    <h2 class="m-headline">Account
+                        created
+                    </h2>
+                 <div class="m-text pt-2">
+                    Your account has been created!
+                    <br />
+                    Thanks for using our site!
+                    <br />
+                    Please wait for the confirmation from the administration to be authorized. This process will take a maximum of 48 hours.
+                 </div>
+
+
+                </td>
+                <td class="m-right m-desktop">
+                    <img src="https://svgshare.com/i/wD4.svg"
+                         alt="account created image"
+                         width="100%"
+                         class="m-image" />
+                </td>
+            </tr>
+            <tr>
+                <td col-span
+                    class="m-mobile">
+                    <img src="https://svgshare.com/i/wD4.svg"
+                         alt="account created image"
+                         width="100%"
+                         class="m-image" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"
+                    class="m-footer">
+                    <a href="{{ protocol }}://{{ domain }}/"
+                       class="m-button btn btn-success btn-lg col-sm-6 col-md-4 text-white">Go to Login
+                        Page</a>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load i18n %}
+{% load static %}
+
+
+
+{% block html_body %}
+<head>
+    <title>Reminder: Your RoboCare Demo Expires in One Week!</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Roboto&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Fira Code', monospace;
+            font-family: 'Roboto', sans-serif;
+            color: #42505C;
+        }
+
+        .mod-verify-account {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .m-logo,
+        .m-image {
+            max-width: 100%;
+        }
+
+        .m-table {
+            max-width: 800px;
+            margin: 50px auto;
+        }
+
+        .m-right {
+            text-align: center;
+        }
+
+        .m-footer {
+            text-align: center;
+            padding-top: 30px;
+        }
+
+        .m-button {
+            background-color: #4f9a44;
+            padding: 10px 30px;
+            color: white;
+            border: 0;
+            border-radius: 0;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .m-headline {
+                font-size: 14px;
+            }
+
+            .m-mobile {
+                display: block;
+                text-align: center;
+                margin-top: 30px;
+            }
+
+            .m-desktop {
+                display: none;
+            }
+        }
+
+        @media only screen and (min-width: 768px) {
+            .m-headline {
+                font-size: 14px;
+            }
+
+            .m-mobile {
+                display: none;
+            }
+
+            .m-desktop {
+                display: block;
+            }
+        }
+
+        .m-headline {
+            font-weight: bold;
+        }
+
+        .m-text {
+            font-size: 14px;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .m-image {
+                width: 300px;
+            }
+
+            .m-logo {
+                width: 150px;
+            }
+        }
+
+        @media only screen and (min-width: 1024px) {
+            .m-image {
+                width: 350px;
+            }
+
+            .m-logo {
+                width: 200px;
+            }
+
+            .m-left {
+                width: 50%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="mod-verify-account">
+    <table class="m-table">
+        <tr>
+            <td colspan="2">
+                <img src="https://app.satellite.robocare.tn/static/media/logo_login.f5c8e05f8a0f94e38c23.png"
+                     alt="robocare logo"
+                     class="m-logo"
+                     width="150px"/>
+            </td>
+        </tr>
+        <tr>
+            <td class="m-left">
+                <h2 class="m-headline">Dear Mr./Ms. {{ user }},</h2>
+                <div class="m-text pt-2">
+                    <p>We hope you’ve been enjoying the valuable insights RoboCare has provided during your demo period. This is a friendly reminder that your demo account will expire in just one week.</p>
+                    <p>To continue benefiting from features such as:</p>
+                    <ul>
+                        <li>Advanced data analytics for optimized agricultural management</li>
+                        <li>Tailored recommendations specific to your crops and growing conditions</li>
+                        <li>Dedicated support to enhance your farming efficiency</li>
+                    </ul>
+                    <p>We encourage you to upgrade to a professional account and unlock the full potential of RoboCare.</p>
+                    <p>Should you have any questions or wish to upgrade, don’t hesitate to contact us at <a href="tel:+21653140011">(+216) 53 140 011</a> or via email at <a href="mailto:mkadri@robocare.tn">mkadri@robocare.tn</a> or <a href="mailto:ihbiri@robocare.tn">ihbiri@robocare.tn</a>.</p>
+                    <p>Thank you for choosing RoboCare, and we look forward to supporting your success in agriculture!</p>
+                </div>
+            </td>
+            <!--<td class="m-right m-desktop">
+                <img src="https://app.satellite.robocare.tn/static/images/activation.png" alt="verify account image"
+                     width="100%" class="m-image"/>
+            </td>-->
+        </tr>
+        <!--<tr>
+            <td colspan="2" class="m-mobile">
+                <img src="https://app.satellite.robocare.tn/static/images/activation.png" alt="verify account image"
+                     width="100%" class="m-image"/>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="m-footer">
+                <a href="{{ contact }}" class="m-button btn btn-success btn-lg col-sm-6 col-md-4 text-white"
+                   style="color:#ffffff!important">Contact Support</a>
+            </td>
+        </tr>-->
+    </table>
+</div>
+</body>
+
+{% endblock html_body %}
+</html>

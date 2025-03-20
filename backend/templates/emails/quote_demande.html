@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load i18n %}
+{% load static %}
+
+{% block text_body %}
+    {% blocktrans %}
+        You are receiving this email because Mr/Ms {{ user }}.  has sent a request for a quote. Please review and take
+        the necessary actions to respond promptly.
+    {% endblocktrans %}
+{% endblock text_body %}
+
+{% block html_body %}
+
+
+    <head>
+        <title>Robocare - Verify Account</title>
+
+        <link rel="preconnect"
+              href="https://fonts.googleapis.com">
+        <link rel="preconnect"
+              href="https://fonts.gstatic.com"
+              crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Roboto&display=swap"
+              rel="stylesheet">
+
+
+        <style>
+            * {
+                font-family: 'Fira Code', monospace;
+                font-family: 'Roboto', sans-serif;
+                color: #42505C;
+            }
+
+            .mod-verify-account {
+                height: 100vh;
+                display: flex;
+                align-items: center;
+            }
+
+            .m-logo,
+            .m-image {
+                max-width: 100%;
+            }
+
+            .m-table {
+                max-width: 800px;
+                margin: 50px auto;
+            }
+
+            .m-right {
+                text-align: center;
+            }
+
+            .m-footer {
+                text-align: center;
+                padding-top: 30px;
+            }
+
+            .m-button {
+                background-color: #4f9a44;
+                padding: 10px 30px;
+                color: white;
+                border: 0;
+                border-radius: 0;
+                cursor: pointer;
+                text-decoration: none;
+            }
+
+            @media only screen and (max-width: 768px) {
+
+                .m-headline {
+                    font-size: 34px;
+                }
+
+                .m-mobile {
+                    display: block;
+                    text-align: center;
+                    margin-top: 30px;
+                }
+
+                .m-desktop {
+                    display: none;
+                }
+            }
+
+            @media only screen and (min-width: 768px) {
+
+                .m-headline {
+                    font-size: 54px;
+                }
+
+                .m-mobile {
+                    display: none;
+                }
+
+                .m-desktop {
+                    display: block;
+                }
+            }
+
+
+            .m-headline {
+                font-weight: bold;
+            }
+
+            .m-text {
+                font-size: 14px;
+            }
+
+            @media only screen and (max-width: 768px) {
+                .m-image {
+                    width: 300px;
+                }
+
+                .m-logo {
+                    width: 150px;
+                }
+            }
+
+            @media only screen and (min-width: 1024px) {
+                .m-image {
+                    width: 350px;
+                }
+
+                .m-logo {
+                    width: 200px;
+                }
+
+                .m-left {
+                    width: 50%;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+    <div class="mod-verify-account">
+
+        <table class="m-table">
+            <tr>
+                <td colspan="2">
+                    <img src="https://app.satellite.robocare.tn/static/media/logo_login.f5c8e05f8a0f94e38c23.png"
+                         alt="robocare logo"
+                         class="m-logo"
+                         width="150px"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="m-left">
+                    <div class="m-text pt-2">
+                        <p>
+                            Mr/Ms {{ user }} from {{ company }} has sent a request for a quote. Here are their credentials:
+                            <br/>
+                            <strong>User Name:</strong> {{ user }}<br/>
+                            <strong>Email :</strong> {{ email }}<br/>
+                            <strong>Phone number :</strong> {{ phone }}<br/>
+                            <strong>Company :</strong> {{ company }}<br/>
+                            <strong>Hectares :</strong> {{ nb_hectares }} hectares<br/>
+                        </p>
+                    </div>
+                    
+
+                </td>
+                <td class="m-right m-desktop">
+                    <img src="https://app.satellite.robocare.tn/static/images/activation.png" alt="verify account image"
+                         width="70%" class="m-image"/>
+                </td>
+            </tr>
+            <tr>
+                <td col-span
+                    class="m-mobile">
+                    <img src="https://app.satellite.robocare.tn/static/images/activation.png" alt="verify account image"
+                         width="70%" class="m-image"/>
+                </td>
+            </tr>
+
+        </table>
+
+    </div>
+    </body>
+
+
+
+{% endblock html_body %}
+</html>

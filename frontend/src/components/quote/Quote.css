@@ -1,0 +1,44 @@
+input {
+    border: none;
+}
+
+input:focus {
+    outline: none;
+}
+
+.label-signupCheckbox {
+    font-weight: 500;
+}
+
+.contact-checkbox {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+.contact-link {
+    color: #6f9d2f;
+    font-weight: 600;
+}
+.contact-link:hover {
+    color: #4f9a44;
+
+}
+.terms-link {
+    color: #6f9d2f;
+    font-weight: 500;
+
+}
+.contact-container{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.PhoneInput{
+    display: flex!important;
+}
+.contact-input > label{
+    transform: translate(14px, 9px) scale(1);
+}
+.contact-input > label[data-shrink="true"]{
+    transform: translate(14px, -9px) scale(0.75);
+
+}
