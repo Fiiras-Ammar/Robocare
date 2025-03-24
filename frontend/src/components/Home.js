@@ -66,26 +66,25 @@ const Home = ({}) => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const fetchData = async () => {
-            dispatch(loadingBegin());
-            try {
-                const res = await dispatch(getStatistics());
-                if (res.status === 200) {
-                    setStatistics(res.data.data);
-                    setData(formatData(res.data.data.varieties, "variety_name_"));
-                    setCultureData(formatData(res.data.data.cultures, "culture_name_"));
-                }
-            } catch (error) {
-                console.error(error);
-            } finally {
-                dispatch(loadingEnd());
+    // Add null checks before data access
+useEffect(() => {
+    const fetchData = async () => {
+        try {
+            const res = await dispatch(getStatistics());
+            if (res?.status === 200 && res?.data?.data) {
+                setStatistics(res.data.data);
+                // Safely format data
+                const varieties = res.data.data.varieties || [];
+                const cultures = res.data.data.cultures || [];
+                setData(formatData(varieties, "variety_name_"));
+                setCultureData(formatData(cultures, "culture_name_"));
             }
-        };
-
-
-        fetchData();
-    }, [dispatch, currentLanguageCode]);
+        } catch (error) {
+            console.error("Statistics fetch failed:", error);
+        }
+    };
+    fetchData();
+}, [dispatch, currentLanguageCode]);
 
     useEffect(() => {
         const fetchInvoices = async () => {

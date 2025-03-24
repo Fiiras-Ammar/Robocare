@@ -20,9 +20,6 @@ urlpatterns = [
     path('user/sum/', views.count_users),
     path('user/check-email/<str:email>/', views.check_email),
     path('user/demo-account-rest-days/<str:pk>/', views.get_demo_account_rest_days),
-
-    # route for Google auth
-    path('user/auth/google/', GoogleAuthView.as_view(), name='google-auth'),
     path('auth/csrf/', get_csrf_token, name='get_csrf'),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('user/auth/google/', GoogleAuthView.as_view(), name='google-auth'),

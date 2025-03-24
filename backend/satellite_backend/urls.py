@@ -25,6 +25,8 @@ from mesurements.serializers import CutomObtainPairView
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.csrf import get_token
 from django.http import JsonResponse
+from authentification.views import GoogleAuthView 
+
 
 admin.site.site_header = "Robocare Satellite App"
 admin.site.site_title = "Robocare Satellite App"
@@ -41,6 +43,7 @@ urlpatterns = [
     path('irrigation/', include('irrigation.urls')),
     path('auth/', include('authentification.urls')),
     path('auth/csrf/', get_csrf_token, name='get_csrf'),
+
 
 
 ]

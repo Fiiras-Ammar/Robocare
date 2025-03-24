@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axiosInstance from '../utils/axiosConfig';
 import {
     REQUEST_EMPTY,
     REQUEST_EXIST
@@ -11,7 +11,7 @@ export const get_request_high_resolution = (task) => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/task/subscription/check_exist/${task}/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/task/subscription/check_exist/${task}/`, config);
         dispatch({
             type: REQUEST_EXIST,
             payload: res.data.data
@@ -34,7 +34,7 @@ export const add_request = (date_of_request, subscription) => async dispatch => 
     }
     const body = JSON.stringify({ date_of_request, subscription });
     try {
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/task/subscription/request/add/`, body, config);
+        const res = await axiosInstance.post(`${process.env.REACT_APP_API_URL}/api/task/subscription/request/add/`, body, config);
         return res
     } catch (err) {
         return err

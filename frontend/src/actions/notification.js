@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axiosInstance from "../utils/axiosConfig.js";
 import {
     USER_NOTIFICATIONS_SUCCESS,
     USER_NOTIFICATIONS_FAIL,
@@ -14,7 +14,7 @@ export const get_user_notifications_head = (id) => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/user/notifications/get/head/${id}/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/user/notifications/get/head/${id}/`, config);
 
         dispatch({
             type: USER_NOTIFICATIONS_HEAD_SUCCESS,
@@ -36,7 +36,7 @@ export const get_user_notifications = (id) => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/user/notifications/get/${id}/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/user/notifications/get/${id}/`, config);
 
         dispatch({
             type: USER_NOTIFICATIONS_SUCCESS,
@@ -59,7 +59,7 @@ export const get_task_notifications = (id) => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/task/notifications/get/${id}/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/task/notifications/get/${id}/`, config);
 
         // dispatch({
         //     type: USER_NOTIFICATIONS_SUCCESS,
@@ -83,7 +83,7 @@ export const getTaskPatternAlerts = (user_id, task_id, limit) => async dispatch 
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/task/pattern/alerts/list/${user_id}/${task_id}/${limit}/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/task/pattern/alerts/list/${user_id}/${task_id}/${limit}/`, config);
 
         // dispatch({
         //     type: USER_NOTIFICATIONS_SUCCESS,
@@ -107,7 +107,7 @@ export const getTaskNdviForecastAlerts = (user_id, task_id, limit) => async disp
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/task/indexforecast/alerts/list/${user_id}/${task_id}/${limit}/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/task/indexforecast/alerts/list/${user_id}/${task_id}/${limit}/`, config);
 
         // dispatch({
         //     type: USER_NOTIFICATIONS_SUCCESS,
@@ -134,7 +134,7 @@ export const getUserSensorHumidityNotifications = (id,limit) => async dispatch =
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/user/notifications/humidity/${id}/${limit}/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/user/notifications/humidity/${id}/${limit}/`, config);
 
         return res
     } catch (err) {
@@ -147,7 +147,7 @@ export const getUserForcastNotifications = (id,limit) => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/user/indexforecast/alerts/list/${id}/${limit}/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/user/indexforecast/alerts/list/${id}/${limit}/`, config);
 
         return res
     } catch (err) {
@@ -161,7 +161,7 @@ export const getUserSensorBatteryNotifications = (id,limit) => async dispatch =>
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/user/notifications/sensor/battery/${id}/${limit}/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/user/notifications/sensor/battery/${id}/${limit}/`, config);
         return res
     } catch (err) {
         // dispatch({
@@ -183,7 +183,7 @@ export const alterNotificationState = (notifications_ids,user_id) => async dispa
         notifications_ids,user_id
     })
     try {
-        const res = await axios.patch(`${process.env.REACT_APP_API_URL}/api/user/notifications/humidity/state/`,body, config);
+        const res = await axiosInstance.patch(`${process.env.REACT_APP_API_URL}/api/user/notifications/humidity/state/`,body, config);
 
         
         return res
@@ -204,7 +204,7 @@ export const getUserPatternNotifications = (id,limit) => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/user/pattern/alerts/list/${id}/${limit}/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/user/pattern/alerts/list/${id}/${limit}/`, config);
 
         return res
     } catch (err) {
@@ -219,7 +219,7 @@ export const getSelfTaskPatternAlerts = (user_id, task_id, limit) => async dispa
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/task/self/pattern/alerts/list/${user_id}/${task_id}/${limit}/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/task/self/pattern/alerts/list/${user_id}/${task_id}/${limit}/`, config);
 
         // dispatch({
         //     type: USER_NOTIFICATIONS_SUCCESS,

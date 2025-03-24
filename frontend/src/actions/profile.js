@@ -11,7 +11,7 @@ export const getCurrentUser = () => async dispatch => {
         const config = {
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `JWT ${localStorage.getItem('access')}`,
+                'Authorization': `Bearer ${localStorage.getItem('access')}`,
                 'Accept': 'application/json'
             }
         };
@@ -41,7 +41,7 @@ export const updateCurrentUserInformations = (user) => async dispatch => {
         const config = {
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `JWT ${localStorage.getItem('access')}`,
+                'Authorization': `Bearer ${localStorage.getItem('access')}`,
                 'Accept': 'application/json'
             }
         };
@@ -71,7 +71,7 @@ export const updateCurrentUserPassword = (data) => async dispatch => {
         const config = {
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `JWT ${localStorage.getItem('access')}`,
+                'Authorization': `Bearer ${localStorage.getItem('access')}`,
                 'Accept': 'application/json'
             }
         };
@@ -115,7 +115,7 @@ export const listProject = (user) => async dispatch => {
     const config = {
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'JWT ' + localStorage.getItem('access')
+            'Authorization': 'Bearer ' + localStorage.getItem('access')
         }
     }
     try {
@@ -241,7 +241,7 @@ export const getStatistics = (user) => async dispatch => {
     const config = {
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'JWT ' + localStorage.getItem('access')
+            'Authorization': 'Bearer ' + localStorage.getItem('access')
         }
     }
     try {
@@ -257,7 +257,7 @@ export const update_language = (data) => async dispatch => {
         const config = {
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `JWT ${localStorage.getItem('access')}`,
+                'Authorization': ` Bearer${localStorage.getItem('access')}`,
                 'Accept': 'application/json'
             }
         };
@@ -275,7 +275,7 @@ export const get_user_language = (userId) => async dispatch => {
         const config = {
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `JWT ${localStorage.getItem('access')}`,
+                'Authorization': `Bearer ${localStorage.getItem('access')}`,
                 'Accept': 'application/json'
             }
         };
@@ -295,7 +295,7 @@ export const getPDFInvoiceList = (id_user) => async (dispatch) => {
     const config = {
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'JWT ' + localStorage.getItem('access'),
+            'Authorization': 'Bearer ' + localStorage.getItem('access'),
         },
     };
     try {

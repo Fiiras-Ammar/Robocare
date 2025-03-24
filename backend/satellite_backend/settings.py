@@ -58,7 +58,8 @@ ALLOWED_HOSTS = ["http://dev.satellite.robocare.tn", "http://my.smartfarm.com.tn
 CORS_ALLOWED_ORIGINS = [
     "http://dev.satellite.robocare.tn",
     "http://my.smartfarm.com.tn", # react server for dev
-    "http://localhost:3000"
+    "http://localhost:3000",
+    "http://127.0.0.1:3000"
 ]
 
 CSRF_TRUSTED_ORIGINS = ['http://dev.satellite.robocare.tn',
@@ -128,11 +129,14 @@ CSP_SCRIPT_SRC = [
     'https://apis.google.com'
 ]
 CORS_ALLOW_CREDENTIALS = True
+CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS.copy()
 SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'
 SESSION_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
-CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS.copy()
+CSRF_COOKIE_SAMESITE = 'Lax'
+CSRF_USE_SESSIONS = False  # Critical for API-based auth
+
 
 
 
@@ -166,13 +170,25 @@ REST_FRAMEWORK = {
     # 'TEST_REQUEST_DEFAULT_FORMAT': 'vnd.api+json'
 
 SIMPLE_JWT = {
-    'AUTH_HEADER_TYPES': ('JWT',),
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # Ou 60 minutes si vous préférez
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
-    'ROTATE_REFRESH_TOKENS': False,
-    'BLACKLIST_AFTER_ROTATION': False,
-    'UPDATE_LAST_LOGIN': True,
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'UPDATE_LAST_LOGIN': True,  # Choisissez True ou False selon votre préférence
+
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': os.environ.get('SECRET_KEY'),
+    'VERIFYING_KEY': None,
+    
+    'AUTH_HEADER_TYPES': ('Bearer',),  # Ou ('JWT',) selon votre préférence
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
+    
+    'TOKEN_OBTAIN_SERIALIZER': 'rest_framework_simplejwt.serializers.TokenObtainPairSerializer',
+    'TOKEN_REFRESH_SERIALIZER': 'rest_framework_simplejwt.serializers.TokenRefreshSerializer',
 }
+CORS_EXPOSE_HEADERS = ['Content-Type', 'X-CSRFToken']
+
 
 ROOT_URLCONF = "satellite_backend.urls"
 

@@ -1,5 +1,5 @@
 
-import axios from 'axios';
+import axiosInstance from "../utils/axiosConfig.js";
 import {
     DETAIL_TASK_FAIL,
     ADD_EVENT_SUCCESS,
@@ -20,7 +20,7 @@ export const Detail_Task_Simple = (id) => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/task/details-simple/${id}/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/task/details-simple/${id}/`, config);
 
         return res.data.data
     } catch (err) {
@@ -39,7 +39,7 @@ export const Task_Events = (id) => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/events/${id}/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/events/${id}/`, config);
 
 
         return res.data.data
@@ -58,7 +58,7 @@ export const Task_User_Events = (id) => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/events/user/${id}/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/events/user/${id}/`, config);
 
 
         return res.data.data
@@ -80,7 +80,7 @@ export const Add_Task_Event = (object) => async dispatch => {
     }
     try {
         const body = JSON.stringify(object);
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/event/add/`, body, config);
+        const res = await axiosInstance.post(`${process.env.REACT_APP_API_URL}/api/event/add/`, body, config);
         dispatch({
             type: ADD_EVENT_SUCCESS,
             payload: res.data.data
@@ -103,7 +103,7 @@ export const Add_Tasks_Events = (object) => async dispatch => {
     }
     try {
         const body = JSON.stringify(object);
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/event/adds/`, body, config);
+        const res = await axiosInstance.post(`${process.env.REACT_APP_API_URL}/api/event/adds/`, body, config);
 
         dispatch({
             type: ADD_EVENT_SUCCESS,
@@ -127,7 +127,7 @@ export const Update_Task_Event = (object) => async dispatch => {
     }
     try {
         const body = JSON.stringify(object);
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/event/edit/${object.id}/`, body, config);
+        const res = await axiosInstance.post(`${process.env.REACT_APP_API_URL}/api/event/edit/${object.id}/`, body, config);
 
         dispatch({
             type: ADD_EVENT_SUCCESS,
@@ -150,7 +150,7 @@ export const Disease_List = () => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/disease/all/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/disease/all/`, config);
         dispatch({
             type: INSECT_LIST_SUCESS,
             payload: res.data.data.data
@@ -172,7 +172,7 @@ export const DiseaseActor_List = (disease) => async dispatch => {
     }
 
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/disease/actors/${disease}/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/disease/actors/${disease}/`, config);
         return res.data.data
     } catch (err) {
         return err
@@ -187,7 +187,7 @@ export const Products_type_List = () => async dispatch => {
     }
 
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/products/type/all/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/products/type/all/`, config);
         return res.data.data
     } catch (err) {
         return err
@@ -202,7 +202,7 @@ export const Products_by_type = (type) => async dispatch => {
     }
 
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/products/type/${type}/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/products/type/${type}/`, config);
         return res.data.data
     } catch (err) {
         return err
@@ -217,7 +217,7 @@ export const Fertilisation_products = () => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/fertilisation/product/all/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/fertilisation/product/all/`, config);
         return res.data.data
     } catch (err) {
         return err
@@ -231,7 +231,7 @@ export const Stade_phenologiques = () => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/stades/all/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/stades/all/`, config);
         return res.data.data
     } catch (err) {
         return err
@@ -247,7 +247,7 @@ export const DeleteMultipleEvents = (eventIds) => async dispatch => {
     const body = JSON.stringify({ event_ids: eventIds });
 
     try {
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/delete-multiple-event/`, body, config);
+        const res = await axiosInstance.post(`${process.env.REACT_APP_API_URL}/api/delete-multiple-event/`, body, config);
         return res.data;
     } catch (err) {
         throw err;
@@ -261,7 +261,7 @@ export const Delete_Event = (id) => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/event/delete/${id}/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/event/delete/${id}/`, config);
 
         dispatch({
             type: DELETE_EVENT_SUCCESS,
@@ -283,7 +283,7 @@ export const List_Projects_Tasks = (id) => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/user/task/list/${id}/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/user/task/list/${id}/`, config);
 
         return res.data.data
     } catch (err) {
@@ -305,7 +305,7 @@ export const Products_List = (type = '') => async dispatch => {
         } else {
             url += `type/${type}/`;
         }
-        const res = await axios.get(url, config);
+        const res = await axiosInstance.get(url, config);
 
         dispatch({
             type: PRODUCT_LIST_SUCCESS,
@@ -328,7 +328,7 @@ export const Delete_File_visit_field = (id) => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/visit/field/delete/file/${id}/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/visit/field/delete/file/${id}/`, config);
 
         return res.data.data
     } catch (err) {
@@ -353,7 +353,7 @@ export const Anomaly_type = () => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/anomaly/type/all/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/anomaly/type/all/`, config);
         return res.data.data
     } catch (err) {
         return err
@@ -366,7 +366,7 @@ export const Delete_File_anomaly = (id) => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/anomaly/delete/file/${id}/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/anomaly/delete/file/${id}/`, config);
         if (res.status == 200 || res.data.data) {
             return { success: true };
         } else {
@@ -396,7 +396,7 @@ export const TasksList = () => async dispatch => {
     }
 
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/task/list/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/task/list/`, config);
         return res.data.data
     } catch (err) {
         return err

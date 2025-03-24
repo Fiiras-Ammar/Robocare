@@ -71,31 +71,22 @@ class Task(TimeStampedModel, Model):
     age = models.CharField(max_length=30, blank=True, default="")
 
     surface = models.DecimalField(default=0.0, max_digits=30, decimal_places=3)
-    nbTree = models.IntegerField(default=0,null=True, blank=True)
-    nbTreesPerHectare = models.IntegerField(default=0,null=True, blank=True)
-    salinity = models.CharField(
-        max_length=30, blank=False, default="Low (0-2)", null=True
-    )
-
+    nbTree = models.IntegerField(db_column='nb_tree', default=0,null=True,blank=True)
+    nbTreesPerHectare = models.IntegerField(db_column='nb_trees_per_hectare', default=0,null=True, blank=True)
+    salinity = models.CharField(max_length=30, blank=False, default="Low (0-2)", null=True)
     efficiency = models.IntegerField(default=0, null=True, blank=True)
-
     variety = models.ForeignKey("Variety", on_delete=models.CASCADE, null=True)
-
     density = models.ForeignKey("Density", on_delete=models.CASCADE, null=True)
-
     culture = models.ForeignKey("Culture", on_delete=models.CASCADE, null=True)
     texture = models.ForeignKey("Texture", on_delete=models.CASCADE, null=True)
     irrigation = models.ForeignKey("Irrigation", on_delete=models.CASCADE, null=True)
-
     # added fields
     # inter_line = models.IntegerField(null=True, blank=True)
     # intra_line = models.IntegerField(null=True, blank=True)
     # densityPPH = models.IntegerField(null=True, blank=True)
     # plantation_date = models.DateField(null=True, blank=True)
-
     # intensification_date = models.DateField(null=True, blank=True)
     # ""
-
     objects = GeoManager()
     image = models.FileField(
         upload_to=task_image_upload_path, null=True, blank=True)
@@ -115,13 +106,8 @@ class Task(TimeStampedModel, Model):
     intensification_variety = models.ForeignKey("Variety", on_delete=models.CASCADE, null=True, blank=True, related_name="intensification_variety")
     intensification_culture = models.ForeignKey("Culture", on_delete=models.CASCADE, null=True, blank=True, related_name="intensification_culture")
     intensification_density = models.ForeignKey("Density", on_delete=models.CASCADE, null=True, blank=True, related_name="intensification_density")
-
-
 def task_image_date_upload_path(instance, filename):
-    # Construct the upload path based on the task ID
     return f"task_images/{instance.task_id}/{filename}"
-
-
 def request_high_resolution_file_path(instance, filename):
     subscription = instance.subscription
 

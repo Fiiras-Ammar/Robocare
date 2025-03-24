@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axiosInstance from '../utils/axiosConfig';
 import {
     NOTE_SUCCESS,
     NOTE_FAIL,
@@ -18,7 +18,7 @@ export const save_note = (task, datasheet, label) => async dispatch => {
     const body = JSON.stringify({ task, datasheet, label });
 
     try {
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/task/note/save/`, body, config);
+        const res = await axiosInstance.post(`${process.env.REACT_APP_API_URL}/api/task/note/save/`, body, config);
         return res
     } catch (err) {
         return err
@@ -32,7 +32,7 @@ export const get_note = (task, name) => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/task/note/get/${task}/${name}/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/task/note/get/${task}/${name}/`, config);
         dispatch({
             type: NOTE_SUCCESS,
             payload: res.data.data
@@ -54,7 +54,7 @@ export const get_filenames = (task) => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/task/note/get-spreadsheet-names/${task}/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/task/note/get-spreadsheet-names/${task}/`, config);
         dispatch({
             type: NOTE_NAMES_SUCCESS,
             payload: res.data.data

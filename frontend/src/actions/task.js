@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from "../utils/axiosConfig";
 import {
   NDVI_SUCESS,
   NDVI_FAIL,
@@ -116,7 +116,7 @@ export const add_task =
     });
 
     try {
-      const res = await axios.post(
+      const res = await axiosInstance.post(
         `${process.env.REACT_APP_API_URL}/api/task/add/`,
         body,
         config
@@ -178,7 +178,7 @@ export const edit_task =
       intensification_date
     });
     try {
-      const res = await axios.post(
+      const res = await axiosInstance.post(
         `${process.env.REACT_APP_API_URL}/api/task/edit/`,
         body,
         config
@@ -207,7 +207,7 @@ export const edit_task =
 //     }
 //     const body = JSON.stringify({ id, date, provider });
 //     try {
-//         const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/task/detail/`, body, config);
+//         const res = await axiosInstance.post(`${process.env.REACT_APP_API_URL}/api/task/detail/`, body, config);
 
 //         dispatch({
 //             type: DETAIL_TASK_SUCESS,
@@ -228,7 +228,7 @@ export const Task_Center = (id, user_id) => async (dispatch) => {
     },
   };
   try {
-    const res = await axios.get(
+    const res = await axiosInstance.get(
       `${process.env.REACT_APP_API_URL}/api/task/center/${id}/${user_id}/`,
       config
     );
@@ -248,7 +248,7 @@ export const Detail_Task =
     };
     const body = JSON.stringify({ id, provider, date });
     try {
-      const res = await axios.post(
+      const res = await axiosInstance.post(
         `${process.env.REACT_APP_API_URL}/api/task/get/`,
         body,
         config
@@ -284,7 +284,7 @@ export const get_area_by_task_id = (id) => async (dispatch) => {
     },
   };
   try {
-    const res = await axios.get(
+    const res = await axiosInstance.get(
       `${process.env.REACT_APP_API_URL}/api/task/area/${id}/`,
       config
     );
@@ -301,7 +301,7 @@ export const get_task_tree_count = (id) => async (dispatch) => {
     },
   };
   try {
-    const res = await axios.get(
+    const res = await axiosInstance.get(
       `${process.env.REACT_APP_API_URL}/api/task/count_tree/${id}/`,
       config
     );
@@ -342,7 +342,7 @@ export const Sensor_data = (url) => async (dispatch) => {
     },
   };
   try {
-    const res = await axios.get(url, config);
+    const res = await axiosInstance.get(url, config);
     return res;
   } catch (err) {
     return err;
@@ -356,7 +356,7 @@ export const get_dates = (id) => async (dispatch) => {
     },
   };
   try {
-    const res = await axios.get(
+    const res = await axiosInstance.get(
       `${process.env.REACT_APP_API_URL}/api/get-dates/${id}/`,
       config
     );
@@ -374,7 +374,7 @@ export const get_dates_sentinel = (id) => async (dispatch) => {
     },
   };
   try {
-    const res = await axios.get(
+    const res = await axiosInstance.get(
         `${process.env.REACT_APP_API_URL}/api/get-dates/sentinel/${id}/`,
         config
     );
@@ -420,7 +420,7 @@ export const get_task_sensor = (id) => async (dispatch) => {
     },
   };
   try {
-    const res = await axios.get(
+    const res = await axiosInstance.get(
       `${process.env.REACT_APP_API_URL}/api/task/sensor/${id}/`,
       config
     );
@@ -452,7 +452,7 @@ export const getImageByDate = (id, date) => async (dispatch) => {
     },
   };
   try {
-    const res = await axios.get(
+    const res = await axiosInstance.get(
       `${process.env.REACT_APP_API_URL}/api/get-date-image/${id}/${date}/`,
       config
     );
@@ -469,7 +469,7 @@ export const deleteTask = (id_task) => async (dispatch) => {
     },
   };
   try {
-    const res = await axios.get(
+    const res = await axiosInstance.get(
       `${process.env.REACT_APP_API_URL}/api/task/delete/${id_task}/`,
       config
     );
@@ -488,7 +488,7 @@ export const addSubscription =
     };
     const body = JSON.stringify({ task, user, date_of_request, subscription });
     try {
-      const res = await axios.post(
+      const res = await axiosInstance.post(
         `${process.env.REACT_APP_API_URL}/api/task/subscription/add/`,
         body,
         config
@@ -504,7 +504,7 @@ export const submitHighResOrder =
   (task, user, order_date, max_cloud, subscription) => async (dispatch) => {
     const body = JSON.stringify({ task, user, order_date, max_cloud });
     try {
-      const res = await axios({
+      const res = await axiosInstance({
         url: `${process.env.REACT_APP_API_URL}/api/highres/order/submit/`,
         method: "POST",
         data: body,
@@ -518,7 +518,7 @@ export const getOrders = (task_id) => async dispatch => {
     // const body = JSON.stringify({ task });
     try {
 
-        const res = await axios({ url: `${process.env.REACT_APP_API_URL}/api/highres/orders/list/${task_id}/`, method: 'GET', timeout: 10000 })
+        const res = await axiosInstance({ url: `${process.env.REACT_APP_API_URL}/api/highres/orders/list/${task_id}/`, method: 'GET', timeout: 10000 })
         return res
     } catch (err) {
         if (err.code === 'ECONNABORTED') {
@@ -530,7 +530,7 @@ export const getOrders = (task_id) => async dispatch => {
 export const getHighResOrdersForUser = (user_id) => async dispatch => {
     try {
 
-        const res = await axios({ url: `${process.env.REACT_APP_API_URL}/api/user/highres/orders/list/${user_id}/`, method: 'GET', timeout: 10000 })
+        const res = await axiosInstance({ url: `${process.env.REACT_APP_API_URL}/api/user/highres/orders/list/${user_id}/`, method: 'GET', timeout: 10000 })
         return res
     } catch (err) {
         if (err.code === 'ECONNABORTED') {
@@ -544,7 +544,7 @@ export const downloadOrderReport = (order_id, task, filename) => async dispatch 
 
   const body = JSON.stringify({ order_id, task });
   try {
-    const res = await axios({
+    const res = await axiosInstance({
       url: `${process.env.REACT_APP_API_URL}/api/highres/order/download/`,
       responseType: "blob",
       method: "POST",
@@ -584,7 +584,7 @@ export const get_task_sidebar_image = (id) => async (dispatch) => {
     },
   };
   try {
-    const res = await axios.get(
+    const res = await axiosInstance.get(
       `${process.env.REACT_APP_API_URL}/api/task/check_image_sidebar/${id}/`,
       config
     );
@@ -612,7 +612,7 @@ export const set_smart_control_command = (command) => async (dispatch) => {
   };
   const body = JSON.stringify({ command });
   try {
-    const res = await axios.post(
+    const res = await axiosInstance.post(
       "https://smart-irrigation.robocare.tn/api/control",
       body,
       config
@@ -631,7 +631,7 @@ export const get_smart_control_command_status = () => async (dispatch) => {
   };
   const body = JSON.stringify({ command: "" });
   try {
-    const res = await axios.post(
+    const res = await axiosInstance.post(
       "https://smart-irrigation.robocare.tn/api/control",
       body,
       config
@@ -678,7 +678,7 @@ export const Detail_Task_right = (id, provider = "S2", date_left = "", date_righ
           };
           const body = JSON.stringify({ id, provider, date_left,date_right });
           try {
-            const res = await axios.post(
+            const res = await axiosInstance.post(
                 `${process.env.REACT_APP_API_URL}/api/task/get/comparaison/meme-task/right/`,
                 body,
                 config
@@ -755,7 +755,7 @@ export const Detail_Task_left = (id, provider = "S2", date_left = "", date_right
           };
           const body = JSON.stringify({ id, provider, date_left,date_right });
           try {
-            const res = await axios.post(
+            const res = await axiosInstance.post(
                 `${process.env.REACT_APP_API_URL}/api/task/get/comparaison/meme-task/left/`,
                 body,
                 config
@@ -801,7 +801,7 @@ export const set_smart_control_connect = () => async () => {
     },
   };
   try {
-    const res = await axios.get(
+    const res = await axiosInstance.get(
         "https://smart-irrigation.robocare.tn/api/connect",
         config
     );
@@ -850,7 +850,7 @@ export const Detail_Task_spatial_right =
           };
           const body = JSON.stringify({ id, provider, date });
           try {
-            const res = await axios.post(
+            const res = await axiosInstance.post(
                 `${process.env.REACT_APP_API_URL}/api/task/get/`,
                 body,
                 config
@@ -928,7 +928,7 @@ export const Detail_Task_spatial_left =
           };
           const body = JSON.stringify({ id, provider, date });
           try {
-            const res = await axios.post(
+            const res = await axiosInstance.post(
                 `${process.env.REACT_APP_API_URL}/api/task/get/`,
                 body,
                 config
@@ -974,7 +974,7 @@ export const get_tasks_last_images_date = ( user_id) => async (dispatch) => {
     },
   };
   try {
-    const res = await axios.get(
+    const res = await axiosInstance.get(
         `${process.env.REACT_APP_API_URL}/api/last-image-date/statistic/${user_id}/`,
         config
     );

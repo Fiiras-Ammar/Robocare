@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from "../utils/axiosConfig.js";
 
 import {
   DETAIL_TASK_FAIL,
@@ -15,7 +15,7 @@ export const getStartEndDate = () => async (dispatch) => {
     },
   };
   try {
-    const res = await axios.get(
+    const res = await axiosInstance.get(
       `${process.env.REACT_APP_API_URL}/api/index/graph/dates/`,
       config
     );
@@ -39,7 +39,7 @@ export const getIndexArray = (task_id) => async (dispatch) => {
     },
   };
   try {
-    const res = await axios.get(
+    const res = await axiosInstance.get(
       `${process.env.REACT_APP_API_URL}/api/task/graph_data/get/${task_id}/`,
       config
     );
@@ -69,7 +69,7 @@ export const getForecastPredict = (task_id) => async (dispatch) => {
     },
   };
   try {
-    const res = await axios.get(
+    const res = await axiosInstance.get(
       `${process.env.REACT_APP_API_URL}/api/task/graph_data/forecast/predict/get/${task_id}/`,
       config
     );
@@ -86,7 +86,7 @@ export const getIndexForecast = (task_id) => async (dispatch) => {
     },
   };
   try {
-    const res = await axios.get(
+    const res = await axiosInstance.get(
       `${process.env.REACT_APP_API_URL}/api/task/graph_data/indexforecast/get/${task_id}/`,
       config
     );
@@ -108,7 +108,7 @@ export const addForecastParams =
     const body = JSON.stringify({ task, bestYear, BadYears });
 
     try {
-      const res = await axios.post(
+      const res = await axiosInstance.post(
         `${process.env.REACT_APP_API_URL}/api/task/forecast/params/add/`,
         body,
         config
@@ -127,7 +127,7 @@ export const getForecastParams = (task) => async (dispatch) => {
   };
 
   try {
-    const res = await axios.get(
+    const res = await axiosInstance.get(
       `${process.env.REACT_APP_API_URL}/api/task/forecast/params/get/${task}/`,
       config
     );
@@ -145,7 +145,7 @@ export const ForecastTrain = (task) => async (dispatch) => {
   };
 
   try {
-    const res = await axios.get(
+    const res = await axiosInstance.get(
       `${process.env.REACT_APP_API_URL}/api/task/graph_data/forecast/train/${task}/`,
       config
     );
@@ -163,7 +163,7 @@ export const ForecastPredict = (taskid) => async (dispatch) => {
   };
 
   try {
-    const res = await axios.get(
+    const res = await axiosInstance.get(
       `${process.env.REACT_APP_API_URL}/api/task/graph_data/forecast/predict/${taskid}/`,
 
       config
@@ -182,7 +182,7 @@ export const getPattern = (taskid) => async (dispatch) => {
   };
 
   try {
-    const res = await axios.get(
+    const res = await axiosInstance.get(
         `${process.env.REACT_APP_API_URL}/api/task/graph_data/pattern/get/${taskid}/`,
         config
     );
@@ -200,7 +200,7 @@ export const getSelfPattern = (taskid) => async (dispatch) => {
   };
 
   try {
-    const res = await axios.get(
+    const res = await axiosInstance.get(
         `${process.env.REACT_APP_API_URL}/api/task/self/graph_data/pattern/get/${taskid}/`,
         config
     );
@@ -217,7 +217,7 @@ export const get_date_self_pattern = (id) => async dispatch => {
     }
   }
   try {
-    const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/task/self/pattern/get/dates/${id}/`, config);
+    const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/task/self/pattern/get/dates/${id}/`, config);
     return res
   } catch (err) {
     return err
@@ -231,7 +231,7 @@ export const get_anomaly_tasks = (id) => async dispatch => {
     }
   }
   try {
-    const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/task/anomaly/${id}/`, config);
+    const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/task/anomaly/${id}/`, config);
     return res
   } catch (err) {
     return err
@@ -246,7 +246,7 @@ export const getIndexArrayComparison = (task_id,date) => async (dispatch) => {
     },
   };
   try {
-    const res = await axios.get(
+    const res = await axiosInstance.get(
         `${process.env.REACT_APP_API_URL}/api/task/graph_data/comparision/get/${task_id}/${date}/`,
         config
     );
@@ -264,7 +264,7 @@ export const getGraphDataSelfTask = (task_id) => async (dispatch) => {
     },
   };
   try {
-    const res = await axios.get(
+    const res = await axiosInstance.get(
         `${process.env.REACT_APP_API_URL}/api/task/graph_data/get/periode/${task_id}/`,
         config
     );

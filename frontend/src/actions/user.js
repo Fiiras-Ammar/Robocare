@@ -1,5 +1,5 @@
 
-import axios from 'axios';
+import axiosInstance from '../utils/axiosConfig';
 import {
     USER_HISTORY_SUCCESS,
     USER_HISTORY_FAIL,
@@ -21,7 +21,7 @@ export const GetUserHistory = (id) => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/user/history/all/${id}/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/user/history/all/${id}/`, config);
 
         dispatch({
             type: USER_HISTORY_SUCCESS,
@@ -44,7 +44,7 @@ export const GetUserHistoryStatistics = (id) => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/user/history/statistics/${id}/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/user/history/statistics/${id}/`, config);
 
         dispatch({
             type: USER_HISTORY_STATISTICS_SUCCESS,
@@ -67,7 +67,7 @@ export const GetAllUsers = () => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/users/all/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/users/all/`, config);
 
         dispatch({
             type: USER_LIST_SUCCESS,
@@ -90,7 +90,7 @@ export const GetSingleUser = (id) => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/user/${id}/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/user/${id}/`, config);
 
         dispatch({
             type: USER_DETAILS_SUCCESS,

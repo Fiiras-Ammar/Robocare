@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from '../utils/axiosConfig';
 import {
   CONST_LOGIN_SUCCESS,
   CONST_LOGIN_FAIL,
@@ -22,11 +22,110 @@ import {
 } from "../utils/types.js";
 import { persistor } from "../store.js";
 
-export const TimeOutLogOut = () => (dispatch) => {
-  setTimeout(() => {
-    dispatch(clearRefreshInterval());
-    dispatch({ type: LOGOUT });
-  }, 86400000); // 1 day
+export const handleGoogleSignIn = async (idToken) => {
+  try {
+    // Get CSRF token first
+    const csrfResponse = await axiosInstance.get(
+      `${process.env.REACT_APP_API_URL}/auth/csrf/`,
+      { withCredentials: true }
+    );
+
+    // Exchange Firebase token for JWT
+    const response = await axiosInstance.post(
+      `${process.env.REACT_APP_API_URL}/user/auth/google/`,
+      { id_token: idToken },
+      {
+        headers: {
+          'X-CSRFToken': csrfResponse.data.csrfToken,
+          'Content-Type': 'application/json'
+        },
+        withCredentials: true
+      }
+    );
+
+    // Secure token storage
+    if (response.data.access && response.data.refresh) {
+      localStorage.setItem('access', response.data.access);
+      sessionStorage.setItem('refresh', response.data.refresh);  // More secure
+      
+      // Set axios default headers
+      axiosInstance.defaults.headers.common['Authorization'] = 
+        `Bearer ${response.data.access}`;
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error('Token exchange error:', error);
+    throw error;
+  }
+};
+
+// Enhanced token refresh logic
+export const handleGoogleAuth = async (idToken) => {
+  try {
+    // Get CSRF token
+    const csrfRes = await axiosInstance.get(
+      `${process.env.REACT_APP_API_URL}/auth/csrf/`,
+      { withCredentials: true }
+    );
+
+    // Exchange Firebase token for JWT
+    const response = await axiosInstance.post(
+      `${process.env.REACT_APP_API_URL}/user/auth/google/`,
+      { id_token: idToken },
+      {
+        headers: {
+          'X-CSRFToken': csrfRes.data.csrfToken,
+          'Content-Type': 'application/json'
+        },
+        withCredentials: true
+      }
+    );
+
+    // Token storage
+    if (response.data.access && response.data.refresh) {
+      localStorage.setItem('access', response.data.access);
+      sessionStorage.setItem('refresh', response.data.refresh);
+      axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${response.data.access}`;
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error('Auth error:', error.response?.data || error.message);
+    throw error;
+  }
+};
+
+export const refreshAccessToken = async () => {
+  try {
+    const refreshToken = sessionStorage.getItem('refresh');
+    const response = await axiosInstance.post(
+      `${process.env.REACT_APP_API_URL}/auth/jwt/refresh/`,
+      { refresh: refreshToken }
+    );
+
+    if (response.data.access) {
+      localStorage.setItem('access', response.data.access);
+      axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${response.data.access}`;
+      
+      // Rotate refresh token if provided
+      if (response.data.refresh) {
+        sessionStorage.setItem('refresh', response.data.refresh);
+      }
+    }
+    
+    return response.data.access;
+  } catch (error) {
+    console.error('Token refresh failed:', error);
+    clearAuthData();
+    throw error;
+  }
+};
+
+export const clearAuthData = () => {
+  localStorage.removeItem('access');
+  sessionStorage.removeItem('refresh');
+  delete axiosInstance.defaults.headers.common['Authorization'];
 };
 
 export const setUpRefreshInterval = () => (dispatch) => {
@@ -57,7 +156,7 @@ export const refreshToken = () => async (dispatch) => {
   };
 
   try {
-    const res = await axios.post(
+    const res = await axiosInstance.post(
       `${process.env.REACT_APP_API_URL}/auth/jwt/refresh/`,
       { refresh: localStorage.getItem("refresh") },
       config
@@ -75,7 +174,7 @@ export const refreshToken = () => async (dispatch) => {
 export const checkAuthenticated = () => async (dispatch) => {
   if (localStorage.getItem("access")) {
     try {
-      await axios.post(
+      await axiosInstance.post(
         `${process.env.REACT_APP_API_URL}/auth/jwt/verify/`,
         { token: localStorage.getItem("access") }
       );
@@ -113,7 +212,7 @@ export const load_user = () => async (dispatch) => {
   };
 
   try {
-    const res = await axios.get(
+    const res = await axiosInstance.get(
       `${process.env.REACT_APP_API_URL}/auth/users/me/`,
       config
     );
@@ -150,7 +249,7 @@ export const login = (email, password, remember) => async (dispatch) => {
 
   try {
     const body = JSON.stringify({ email, password });
-    const res = await axios.post(
+    const res = await axiosInstance.post(
       `${process.env.REACT_APP_API_URL}/auth/jwt/create/`, // Fixed environment variable
       body,
       config
@@ -193,7 +292,7 @@ export const signup =
       re_password,
     });
     try {
-      const res = await axios.post(
+      const res = await axiosInstance.post(
         `${process.env.REACT_APP_API_URL}/auth/users/`,
         body,
         config
@@ -220,7 +319,7 @@ export const verify = (uid, token) => async (dispatch) => {
   };
   const body = JSON.stringify({ uid, token });
   try {
-    await axios.post(
+    await axiosInstance.post(
       `${process.env.REACT_APP_API_URL}/auth/users/activation/`,
       body,
       config
@@ -244,7 +343,7 @@ export const check_exist_email = (email) => async (dispatch) => {
     },
   };
   try {
-    const res = await axios.get(
+    const res = await axiosInstance.get(
       `${process.env.REACT_APP_API_URL}/auth/user/check-email/${email}/`,
       config
     );
@@ -262,7 +361,7 @@ export const reset_password = (email) => async (dispatch) => {
   };
   const body = JSON.stringify({ email });
   try {
-    await axios.post(
+    await axiosInstance.post(
       `${process.env.REACT_APP_API_URL}/auth/users/reset_password/`,
       body,
       config
@@ -286,7 +385,7 @@ export const reset_password_confirm =
     };
     const body = JSON.stringify({ uid, token, new_password, re_new_password });
     try {
-      await axios.post(
+      await axiosInstance.post(
         `${process.env.REACT_APP_API_URL}/auth/users/reset_password_confirm/`,
         body,
         config

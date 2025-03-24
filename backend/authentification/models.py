@@ -70,6 +70,10 @@ class UserAccount(TimeStampedModel, AbstractBaseUser, PermissionsMixin):
     objects = UserAccountManager()
     language = models.CharField(max_length=255,default='fr')
 
+    firebase_uid = models.CharField(max_length=128, blank=True, null=True, unique=True)
+    phone = models.CharField(max_length=20, blank=True, null=True)  # Permettre NULL
+
+
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["firstname", "lastname", "company", "phone"]
 

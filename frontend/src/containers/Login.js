@@ -18,10 +18,9 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import LoginIcon from '@mui/icons-material/Login';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { login, load_user, setUpRefreshInterval, TimeOutLogOut } from '../actions/auth';
+import { login, load_user, setUpRefreshInterval, logout } from '../actions/auth';
 import { showSnackbar } from '../actions/snackbar';
 import { useTranslation } from 'react-i18next';
-import axios from 'axios';
 import image from '../assets/images/crop.b3a902767e85f1b371c1.png';
 import logo from '../assets/images/LOGO-ROBOCARE-FINAL-SEPT-2021-1-200x80.png';
 import FacebookIcon from '../assets/images/facebook.png';
@@ -37,8 +36,10 @@ import {
   getRedirectResult 
 } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
-import { CONST_LOGIN_SUCCESS, KEEP_ME_SIGN_IN_CHECKED } from "../utils/types.js";
+import { CONST_LOGIN_SUCCESS, KEEP_ME_SIGN_IN_CHECKED,CONST_LOGIN_FAIL } from "../utils/types.js";
 import CircularProgress from '@mui/material/CircularProgress';
+
+import axiosInstance from '../utils/axiosConfig';
 
 
 
@@ -98,22 +99,27 @@ const LoginPage = () => {
   const handleGoogleSignIn = async () => {
     try {
       setGoogleLoading(true);
-      const provider = new GoogleAuthProvider();
-      provider.setCustomParameters({ prompt: 'select_account' });
-  
-      // Step 1: Get CSRF token
-      const csrfResponse = await axios.get(
+      
+      // 1. Récupération du Token CSRF
+      const csrfResponse = await axiosInstance.get(
         `${process.env.REACT_APP_API_URL}/auth/csrf/`,
         { withCredentials: true }
       );
+      console.log("CSRF Token obtenu:", csrfResponse.data.csrfToken);
   
-      // Step 2: Sign in with Google using Firebase
+      // 2. Authentification avec Google (Firebase)
+      const provider = new GoogleAuthProvider();
+      provider.setCustomParameters({ prompt: 'select_account' });
       const result = await signInWithPopup(auth, provider);
       const idToken = await result.user.getIdToken();
+      
+      console.log("Token ID obtenu (début):", idToken.substring(0, 20) + "...");
   
-      // Step 3: Send ID token to your backend
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/user/auth/google/`,
+      // 3. Envoi au Backend
+      console.log("Envoi de la requête à:", `${process.env.REACT_APP_API_URL}/auth/user/auth/google/`);
+      
+      const response = await axiosInstance.post(
+        `${process.env.REACT_APP_API_URL}/auth/user/auth/google/`,
         { id_token: idToken },
         {
           headers: {
@@ -124,13 +130,15 @@ const LoginPage = () => {
         }
       );
   
-      // Step 4: Handle successful response
+      // 4. Gestion du succès
       if (response.status === 200) {
-        // Store tokens in localStorage
+        console.log("Authentification réussie. Réponse serveur:", response.data);
+  
+        // Stocker les tokens
         localStorage.setItem('access', response.data.access);
         localStorage.setItem('refresh', response.data.refresh);
   
-        // Update Redux state
+        // Dispatch login success
         dispatch({
           type: CONST_LOGIN_SUCCESS,
           payload: {
@@ -139,17 +147,47 @@ const LoginPage = () => {
           }
         });
   
-        // Load user data and navigate
+        // Charger les données utilisateur
         await dispatch(load_user());
+  
+        // Gérer l'intervalle de rafraîchissement
+        if (rememberMe) {
+          dispatch(setUpRefreshInterval());
+        } else {
+          dispatch(logout());
+        }
+  
+        // Rediriger et afficher le succès
         navigate('/dashboard', { replace: true });
+        dispatch(showSnackbar('success', t('Login successful!')));
       }
+  
     } catch (error) {
       console.error('Google auth failed:', error);
-      dispatch(showSnackbar('error', t('Google login failed. Try again.')));
+  
+      if (error.response) {
+        console.error('Error response data:', error.response.data);
+        console.error('Error response status:', error.response.status);
+        
+        const errorMessage = error.response.data?.error || 
+                            error.response.data?.detail || 
+                            'Google login failed. Try again.';
+        
+        dispatch(showSnackbar('error', t(errorMessage)));
+      } else if (error.request) {
+        console.error('Error request:', error.request);
+        dispatch(showSnackbar('error', t('No response received from server')));
+      } else {
+        console.error('Error message:', error.message);
+        dispatch(showSnackbar('error', t('Error setting up request')));
+      }
+  
+      dispatch({ type: CONST_LOGIN_FAIL });
     } finally {
       setGoogleLoading(false);
     }
   };
+  
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -160,7 +198,7 @@ const LoginPage = () => {
         if (res.status === 200) {
           dispatch(load_user()).then(() => {
             navigate('/dashboard');
-            rememberMe ? dispatch(setUpRefreshInterval()) : dispatch(TimeOutLogOut());
+            rememberMe ? dispatch(setUpRefreshInterval()) : dispatch(logout());
           });
         } else if (res.response?.status === 401) {
           dispatch(showSnackbar('error', t('Please verify your credentials!')));

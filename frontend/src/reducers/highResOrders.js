@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axiosInstance from '../utils/axiosConfig';
 import {
     HIGH_RES_ORDERS,
 } from '../utils/types';

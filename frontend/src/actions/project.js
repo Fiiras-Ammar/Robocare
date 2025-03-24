@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axiosInstance from '../utils/axiosConfig.js';
 import {
 SELECTED_PROJECT_SUCCESS,
 SELECTED_PROJECT_FAIL
@@ -12,7 +12,7 @@ export const addProject = (user, project_name ) => async dispatch => {
     }
     const body = JSON.stringify({ user, project_name });
     try {
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/project/add/`, body, config);
+        const res = await axiosInstance.post(`${process.env.REACT_APP_API_URL}/api/project/add/`, body, config);
         return res
     } catch (err) {
         return err
@@ -27,7 +27,7 @@ export const check_staff = (user) => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/auth/user/check-staff/${user}/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/auth/user/check-staff/${user}/`, config);
         return res
     } catch (err) {
         return err
@@ -42,7 +42,7 @@ export const sum_clients = () => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/auth/user/sum/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/auth/user/sum/`, config);
         return res
     } catch (err) {
         return err
@@ -57,7 +57,7 @@ export const sum_area = () => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/task/surface/sum/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/task/surface/sum/`, config);
         return res
     } catch (err) {
         return err
@@ -72,7 +72,7 @@ export const sum_tasks = () => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/task/sum/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/task/sum/`, config);
         return res
     } catch (err) {
         return err
@@ -87,7 +87,7 @@ export const getSensorList = () => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/sensor/list/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/sensor/list/`, config);
         return res
     } catch (err) {
         return err
@@ -102,7 +102,7 @@ export const sum_sensors = () => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/sensor/sum/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/sensor/sum/`, config);
         return res
     } catch (err) {
         return err
@@ -117,7 +117,7 @@ export const listProject = (user) => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/project/list/${user}/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/project/list/${user}/`, config);
         return res
     } catch (err) {
         return err
@@ -132,7 +132,7 @@ export const listSensorData = () => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/sensor-data/list`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/sensor-data/list`, config);
         return res
     } catch (err) {
         return err
@@ -147,7 +147,7 @@ export const listSensorDataByTask = (taskId) => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/sensor-data/list/${taskId}`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/sensor-data/list/${taskId}`, config);
         return res
     } catch (err) {
         return err
@@ -161,7 +161,7 @@ export const getType = () => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/type/list/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/type/list/`, config);
         return res.data
     } catch (err) {
         return err
@@ -175,7 +175,7 @@ export const getCulture = (lang='en') => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/culture/list/?lang=${lang}`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/culture/list/?lang=${lang}`, config);
         return res.data
     } catch (err) {
         return err
@@ -189,7 +189,7 @@ export const getTexture = (lang='en') => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/texture/list/?lang=${lang}`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/texture/list/?lang=${lang}`, config);
         return res.data
     } catch (err) {
         return err
@@ -203,7 +203,7 @@ export const getIrrigation = (lang='en') => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/irrigation/list/?lang=${lang}`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/irrigation/list/?lang=${lang}`, config);
         return res.data
     } catch (err) {
         return err
@@ -217,7 +217,7 @@ export const getVariety = (id) => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/variety/list/${id}/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/variety/list/${id}/`, config);
         return res.data
     } catch (err) {
         return err
@@ -231,7 +231,7 @@ export const getVarietyAll = () => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/variety/list/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/variety/list/`, config);
         return res.data
     } catch (err) {
         return err
@@ -245,7 +245,7 @@ export const getDensity = (id) => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/density/list/${id}/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/density/list/${id}/`, config);
         return res.data
     } catch (err) {
         return err
@@ -259,7 +259,7 @@ export const getDensityAll = () => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/density/list/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/density/list/`, config);
         return res.data
     } catch (err) {
         return err
@@ -273,7 +273,7 @@ export const getTaskAge = (id_task) => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/task/age/get/${id_task}/`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/task/age/get/${id_task}/`, config);
         return res.data
     } catch (err) {
         return err
@@ -286,7 +286,7 @@ export const getCultureByCategory = (lang='en') => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/culture/list/with-categorie/?lang=${lang}`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/culture/list/with-categorie/?lang=${lang}`, config);
 
         return res.data
     } catch (err) {
@@ -302,7 +302,7 @@ export const getNonTreeCultureIds = () => async dispatch => {
         }
     }
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/non-tree-cultures-ids/list`, config);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/non-tree-cultures-ids/list`, config);
         return res.data
     } catch (err) {
         return err

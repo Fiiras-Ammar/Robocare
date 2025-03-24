@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axiosInstance from '../utils/axiosConfig.js'
 import {
     TASK_WEATHER_SUCCESS,
     TASK_WEATHER_FAIL,
@@ -16,7 +16,7 @@ export const getSensorData = (task_id) => async dispatch => {
     const apiUrl = `${process.env.REACT_APP_API_URL}/api/sensor-data/list/${task_id}`
     
     try {
-        const res = await axios.get(`${apiUrl}`, config);
+        const res = await axiosInstance.get(`${apiUrl}`, config);
         if (res.status === 200) {
             // dispatch({
             //     type: TASK_WEATHER_SUCCESS,
@@ -47,7 +47,7 @@ export const getSensorData = (task_id) => async dispatch => {
 //     const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&daily=temperature_2m_max,temperature_2m_min,rain_sum,wind_speed_10m_max,weather_code,et0_fao_evapotranspiration&forecast_days=16`;
 
 //     try {
-//         const res = await axios.get(`${apiUrl}`, config);
+//         const res = await axiosInstance.get(`${apiUrl}`, config);
 //         if (res.status === 200) {
 //             dispatch({
 //                 type: TASK_WEATHER_SUCCESS,
@@ -77,7 +77,7 @@ export const getSensorData = (task_id) => async dispatch => {
 //         }
 //     }
 //     try {
-//         const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/task/map/${id}/`, config);
+//         const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/api/task/map/${id}/`, config);
 
 //         dispatch({
 //             type: DETAIL_TASK_SUCESS,
@@ -101,10 +101,10 @@ export const getSensorData = (task_id) => async dispatch => {
 
 //     const apiKey = "36a6378349df7d5824ea0e58deb42342";
 //     const apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lng}&units=metric&appid=${apiKey}`;
-//     // axios.get(`${apiUrl}&appid=${apiKey}`).then(displayWeatherInfo);
+//     // axiosInstance.get(`${apiUrl}&appid=${apiKey}`).then(displayWeatherInfo);
 
 //     try {
-//         const res = await axios.get(`${apiUrl}`, config);
+//         const res = await axiosInstance.get(`${apiUrl}`, config);
 //         if (res.status === 200) {
 //             dispatch({
 //                 type: TASK_WEATHER_SUCCESS,

@@ -24,49 +24,49 @@ from django.contrib.auth import get_user_model
 logger = logging.getLogger(__name__)
 User = get_user_model()
 
+@method_decorator(csrf_exempt, name='dispatch') 
 class GoogleAuthView(APIView):
     authentication_classes = []
     permission_classes = []
 
     def post(self, request):
-        id_token = request.data.get('id_token')
-        if not id_token:
-            return Response({'error': 'ID token required'}, status=status.HTTP_400_BAD_REQUEST)
-
+        print("POST request received")
         try:
-            # Verify Firebase ID token
+            id_token = request.data.get('id_token')
+            if not id_token:
+                return Response({'error': 'ID token required'}, status=400)
+
+            # Firebase verification
             decoded_token = firebase_auth.verify_id_token(id_token)
-            firebase_uid = decoded_token['uid']
             email = decoded_token.get('email')
-            name = decoded_token.get('name', '').split()
-
-            # Get or create user
-            user, created = User.objects.update_or_create(
-                firebase_uid=firebase_uid,
-                defaults={
-                    'email': email,
-                    'first_name': name[0] if len(name) > 0 else '',
-                    'last_name': name[-1] if len(name) > 1 else '',
-                    'is_active': True
-                }
-            )
-
-            # Generate JWT tokens
-            refresh = RefreshToken.for_user(user)
             
+            # Vérifier si l'utilisateur existe déjà par email
+            try:
+                user = User.objects.get(email=email)
+                # Mettre à jour le firebase_uid si l'utilisateur existe
+                user.firebase_uid = decoded_token['uid']
+                user.save()
+            except User.DoesNotExist:
+                # Créer un nouvel utilisateur si l'email n'existe pas
+                user = User.objects.create(
+                    email=email,
+                    firebase_uid=decoded_token['uid'],
+                    firstname=decoded_token.get('name', '').split()[0] if decoded_token.get('name') else '',
+                    lastname=' '.join(decoded_token.get('name', '').split()[1:]) if decoded_token.get('name') and ' ' in decoded_token.get('name', '') else '',
+                    is_active=True,
+                    phone=''  # Valeur par défaut pour le champ phone
+                )
+
+            # JWT generation
+            refresh = RefreshToken.for_user(user)
             return Response({
                 'access': str(refresh.access_token),
                 'refresh': str(refresh)
-            }, status=status.HTTP_200_OK)
+            }, status=200)
 
-        except firebase_auth.InvalidIdTokenError:
-            logger.error('Invalid Firebase ID token')
-            return Response({'error': 'Invalid authentication token'}, 
-                          status=status.HTTP_401_UNAUTHORIZED)
         except Exception as e:
-            logger.error(f'Google auth error: {str(e)}')
-            return Response({'error': 'Authentication failed'}, 
-                          status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            print(f"Unexpected error: {str(e)}")
+            return Response({'error': str(e)}, status=400)
 @api_view(["GET"])
 @permission_classes([AllowAny])
 def check_staff(request, pk):

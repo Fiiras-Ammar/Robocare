@@ -12,7 +12,7 @@ import 'bootstrap/dist/js/bootstrap.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'flag-icon-css/css/flag-icons.min.css'
 import LoadingData from './utils/loadingdata';
-import axios from 'axios';
+import axiosInstance from './utils/axiosConfig';
 i18next
   .use(HttpApi)
   .use(LanguageDetector)
@@ -45,6 +45,6 @@ root.render(
     </React.StrictMode>
   </Suspense>,
 );
-axios.defaults.withCredentials = true;
-axios.defaults.xsrfCookieName = 'csrftoken';
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axiosInstance.defaults.withCredentials = true;
+axiosInstance.defaults.xsrfCookieName = 'csrftoken';
+axiosInstance.defaults.xsrfHeaderName = 'X-CSRFToken';

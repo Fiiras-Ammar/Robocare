@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from "../utils/axiosConfig.js";
 
 import {
 
@@ -30,7 +30,7 @@ import {
             };
             const body = JSON.stringify({ id, date, provider, index });
             try {
-                const res = await axios.post(
+                const res = await axiosInstance.post(
                     `${process.env.REACT_APP_API_URL}/api/task/get/index/`,
                     body,
                     config
@@ -67,7 +67,7 @@ import {
     };
     const body = JSON.stringify({ id, date, provider, index,zoneNbr });
     try {
-      const res = await axios.post(
+      const res = await axiosInstance.post(
         `${process.env.REACT_APP_API_URL}/api/task/histogram/productivity/get/`,
         body,
         config
@@ -95,7 +95,7 @@ export const getHistogram =
     };
     const body = JSON.stringify({ id, date, provider, index });
     try {
-      const res = await axios.post(
+      const res = await axiosInstance.post(
         `${process.env.REACT_APP_API_URL}/api/task/get/index/`,
         body,
         config
@@ -124,7 +124,7 @@ export const getHistogram =
     };
     const body = JSON.stringify({ id, date, provider, index,zoneNbr });
     try {
-      const res = await axios.post(
+      const res = await axiosInstance.post(
         `${process.env.REACT_APP_API_URL}/api/task/histogram/productivity/get/`,
         body,
         config
@@ -151,7 +151,7 @@ export const getHistogramStatic =
     };
     const body = JSON.stringify({ index, density });
     try {
-      const res = await axios.post(
+      const res = await axiosInstance.post(
         `${process.env.REACT_APP_API_URL}/api/task/histogram/static/get/`,
         body,
         config
@@ -184,7 +184,7 @@ export const getHistogramRight =
             };
             const body = JSON.stringify({ id, date_left,date_right, provider, index });
             try {
-                const res = await axios.post(
+                const res = await axiosInstance.post(
                     `${process.env.REACT_APP_API_URL}/api/task/get/index/comparaison/meme-task/right/`,
                     body,
                     config
@@ -212,7 +212,7 @@ export const getHistogramLeft =
             };
             const body = JSON.stringify({ id, date_left,date_right, provider, index });
             try {
-                const res = await axios.post(
+                const res = await axiosInstance.post(
                     `${process.env.REACT_APP_API_URL}/api/task/get/index/comparaison/meme-task/left/`,
                     body,
                     config
@@ -240,7 +240,7 @@ export const getBornReferenceTask =
             };
             const body = JSON.stringify({ index, id_task,date });
             try {
-                const res = await axios.post(
+                const res = await axiosInstance.post(
                     `${process.env.REACT_APP_API_URL}/api/task/graph_data/comparision/borns/`,
                     body,
                     config
@@ -273,7 +273,7 @@ export const getHistogramSpatialRight =
             };
             const body = JSON.stringify({ id, date, provider, index });
             try {
-                const res = await axios.post(
+                const res = await axiosInstance.post(
                     `${process.env.REACT_APP_API_URL}/api/task/get/index/`,
                     body,
                     config
@@ -302,7 +302,7 @@ export const getHistogramSpatialLeft =
             };
             const body = JSON.stringify({ id, date, provider, index });
             try {
-                const res = await axios.post(
+                const res = await axiosInstance.post(
                     `${process.env.REACT_APP_API_URL}/api/task/get/index/`,
                     body,
                     config

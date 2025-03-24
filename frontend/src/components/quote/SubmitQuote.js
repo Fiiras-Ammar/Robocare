@@ -1,11 +1,11 @@
 
-import axios from 'axios';
+import axiosInstance from "../../utils/axiosConfig";
 
 const submitQuote = async (formData) => {
     const { email, firstname, lastname, company, phone, hectares, isDemoAccount } = formData;
 
     try {
-        const response = await axios.post('http://localhost:8000/api/quote/add/', {
+        const response = await axiosInstance.post('http://localhost:8000/api/quote/add/', {
             email,
             firstname,
             lastname,

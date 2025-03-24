@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axiosInstance from '../utils/axiosConfig';
 import {
     LOADING_BEGIN,
     REQUEST_EMPTY,
@@ -19,7 +19,7 @@ export const submitIrrigationCalendarRequest = (task_id,formData) => async dispa
     const body = JSON.stringify({ task_id , "formData":formData});
 
     try {
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/irrigation/calendar/add`, body, config);
+        const res = await axiosInstance.post(`${process.env.REACT_APP_API_URL}/irrigation/calendar/add`, body, config);
         // if (res.status == 200) {
         //     dispatch({
         //         type: IRRIGATION_CALENDAR_SUCESS,
@@ -47,7 +47,7 @@ export const checkIrrigationCalendarGenerated = (task_id,formData) => async disp
     const body = JSON.stringify({ task_id });
 
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/irrigation/calendar/get/${task_id}/`);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/irrigation/calendar/get/${task_id}/`);
      
         return res
     } catch (err) {
@@ -65,7 +65,7 @@ export const checkIrrigationCalendarRequest = (task_id) => async dispatch => {
     const body = JSON.stringify({ task_id });
 
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/irrigation/calendar/check_request/${task_id}/`);
+        const res = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/irrigation/calendar/check_request/${task_id}/`);
      
         return res
     } catch (err) {

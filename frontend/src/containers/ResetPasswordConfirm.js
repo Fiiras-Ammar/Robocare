@@ -11,7 +11,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { showSnackbar } from "../actions/snackbar";
-import axios from "axios";
+import axiosInstance from "../utils/axiosConfig";
 import LoadingButton from "@mui/lab/LoadingButton";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";

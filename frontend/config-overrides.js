@@ -17,7 +17,6 @@ function removeNodePrefix(request, resolveContext, callback, resolver) {
 }
 
 module.exports = function override(config) {
-  // 1. Resolver plugin (FIRST in chain)
   config.resolve.plugins = [
     {
       apply: (resolver) => {
@@ -30,7 +29,6 @@ module.exports = function override(config) {
     ...(config.resolve.plugins || [])
   ];
 
-  // 2. Correct polyfill paths
   config.resolve.fallback = {
     ...(config.resolve.fallback || {}),
     crypto: require.resolve('crypto-browserify'),
@@ -51,10 +49,8 @@ module.exports = function override(config) {
     http2: false,
   };
 
-  // 3. Remove redundant aliases
   config.resolve.alias = {};
 
-  // 4. Configure polyfill plugins
   config.plugins = (config.plugins || []).concat([
     new webpack.ProvidePlugin({
       process: 'process/browser',
@@ -65,7 +61,6 @@ module.exports = function override(config) {
     })
   ]);
 
-  // 5. Allow non-fully-specified imports
   config.module.rules.push({
     test: /\.m?js/,
     resolve: { fullySpecified: false },
