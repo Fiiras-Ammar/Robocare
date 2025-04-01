@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, UNSAFE_NavigationContext } from "react-router-dom";
 import Activate from "./containers/Activate";
 import Login from "./containers/Login";
 import Signup from "./containers/Signup";
@@ -110,7 +110,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <SnackBarAlert />
-      <Router>
+      <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <Layout>
           <Routes>
             <Route element={<PublicRoutes />}>

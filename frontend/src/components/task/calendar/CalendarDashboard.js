@@ -1246,51 +1246,52 @@ const CalendarDashboard = () => {
         <Container maxWidth="xl" className="mod-calendar mt-4">
 
             {events &&
-                <FullCalendar
-                    plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, multiMonthPlugin]}
-                    firstDay={1}
-                    headerToolbar={{
-                        left: currentView === 'dayGridMonth'
-                            ? "prev,next today selectAllMonth"
-                            : "prev,next today",
-                        center: "title",
-                        right: currentView === 'dayGridMonth' && selectedEvents.length > 0
-                            ? `deleteSelected ${!isMobile ? "multiMonthYear," : ""}dayGridMonth,timeGridWeek,timeGridDay`
-                            : `${!isMobile ? "multiMonthYear," : ""}dayGridMonth,timeGridWeek,timeGridDay`,
-                    }}
+                <div className="custom-calendar">
+                    <FullCalendar
+                        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, multiMonthPlugin]}
+                        firstDay={1}
+                        headerToolbar={{
+                            left: currentView === 'dayGridMonth'
+                                ? "prev,next today selectAllMonth"
+                                : "prev,next today",
+                            center: "title",
+                            right: currentView === 'dayGridMonth' && selectedEvents.length > 0
+                                ? `deleteSelected ${!isMobile ? "multiMonthYear," : ""}dayGridMonth,timeGridWeek,timeGridDay`
+                                : `${!isMobile ? "multiMonthYear," : ""}dayGridMonth,timeGridWeek,timeGridDay`,
+                        }}
 
-                    customButtons={{
-                        selectAllMonth: {
-                            text: allMonthEventsSelected
-                                ? t("Unselect All for This Month")
-                                : t("Select All for This Month"),
-                            click: handleSelectAllMonthEvents,
-                        },
-                        deleteSelected: {
-                            text: t("Delete Selected Events"),
-                            click: handleDeleteSelected,
-                        },
-                    }}
-                    viewDidMount={(info) => setCurrentView(info.view.type)}
+                        customButtons={{
+                            selectAllMonth: {
+                                text: allMonthEventsSelected
+                                    ? t("Unselect All for This Month")
+                                    : t("Select All for This Month"),
+                                click: handleSelectAllMonthEvents,
+                            },
+                            deleteSelected: {
+                                text: t("Delete Selected Events"),
+                                click: handleDeleteSelected,
+                            },
+                        }}
+                        viewDidMount={(info) => setCurrentView(info.view.type)}
 
-                    initialView={'dayGridMonth'}
+                        initialView={'dayGridMonth'}
 
-                    editable={false}
-                    selectable={true}
-                    selectMirror={true}
-                    dayMaxEvents={true}
-                    weekends={true}
-                    events={calendarEvents}
-                    eventContent={renderEventContent}
-                    eventClick={handleEventClick}
-                    select={handleDateSelect}
-                    eventChange={handleEventChange}
-                    className="custom-calendar"
-                    locale={i18n.language}
-                    locales={locales}
-                    ref={calendarRef}
-                    dateClick={handleDateClick}
-                />
+                        editable={false}
+                        selectable={true}
+                        selectMirror={true}
+                        dayMaxEvents={true}
+                        weekends={true}
+                        events={calendarEvents}
+                        eventContent={renderEventContent}
+                        eventClick={handleEventClick}
+                        select={handleDateSelect}
+                        eventChange={handleEventChange}
+                        locale={i18n.language}
+                        locales={locales}
+                        ref={calendarRef}
+                        dateClick={handleDateClick}
+                    />
+                </div>
             }
 
             <Drawer

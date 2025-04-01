@@ -27,11 +27,11 @@ import {useTranslation} from "react-i18next";
 
 const Notification = () => {
     const {t} = useTranslation();
-    const userId = useSelector((state) => state.auth.user.id);
+    const user = useSelector((state) => state.auth.user);
+    const userId = user?.id;
 
     const [loading, setLoading] = useState(true);
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.auth.user);
     const navigate = useNavigate();
     const [notificationBlocks, setNotificationBlocks] = useState({
         forecast: [],
@@ -50,12 +50,12 @@ const Notification = () => {
     }));
 
     useEffect(() => {
-        if (!user) return;
+        if (!user || !userId) return;
 
         const fetchAlerts = async () => {
-            const humidityRes = await dispatch(getUserSensorHumidityNotifications(user.id, 0));
-            const forecastRes = await dispatch(getUserForcastNotifications(user.id, 0));
-            const patternRes = await dispatch(getUserPatternNotifications(user.id, 0));
+            const humidityRes = await dispatch(getUserSensorHumidityNotifications(userId, 0));
+            const forecastRes = await dispatch(getUserForcastNotifications(userId, 0));
+            const patternRes = await dispatch(getUserPatternNotifications(userId, 0));
 
             setNotificationBlocks({
                 forecast: sortAlertsByDate(flattenAlerts(forecastRes.data?.alerts || [])),
@@ -68,7 +68,7 @@ const Notification = () => {
         };
 
         fetchAlerts();
-    }, [user]);
+    }, [user, userId, dispatch]);
 
     const flattenAlerts = (alerts) => {
         return alerts.flatMap(item =>
@@ -85,7 +85,8 @@ const Notification = () => {
     };
 
     const redirectToTask = (task_id, alert_id) => {
-        dispatch(alterNotificationState([alert_id],user.id))
+        if (!userId) return;
+        dispatch(alterNotificationState([alert_id], userId))
         navigate(`/task/detail/${task_id}`);
     };
 

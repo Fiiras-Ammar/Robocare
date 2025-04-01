@@ -27,7 +27,12 @@ class Project(TimeStampedModel, Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     project_name = models.CharField(max_length=30, null=False, blank=False)
     nbr_field = models.IntegerField(default=0)
-    surface = models.DecimalField(default=0.0, max_digits=30, decimal_places=3)
+    surface = models.DecimalField(
+        max_digits=30,
+        decimal_places=3,
+        default=0.0
+    )
+    
 
 
 def task_image_upload_path(instance, filename):
@@ -70,14 +75,30 @@ class Task(TimeStampedModel, Model):
 
     age = models.CharField(max_length=30, blank=True, default="")
 
-    surface = models.DecimalField(default=0.0, max_digits=30, decimal_places=3)
-    nbTree = models.IntegerField(db_column='nb_tree', default=0,null=True,blank=True)
-    nbTreesPerHectare = models.IntegerField(db_column='nb_trees_per_hectare', default=0,null=True, blank=True)
+    surface = models.DecimalField(
+        default=0.0,
+        max_digits=30,
+        decimal_places=3,
+        null=True,
+        blank=True
+    )
+    nbTree = models.IntegerField(db_column='nb_tree', default=0, null=True, blank=True)
+    nbTreesPerHectare = models.IntegerField(db_column='nb_trees_per_hectare', default=0, null=True, blank=True)
     salinity = models.CharField(max_length=30, blank=False, default="Low (0-2)", null=True)
     efficiency = models.IntegerField(default=0, null=True, blank=True)
-    variety = models.ForeignKey("Variety", on_delete=models.CASCADE, null=True)
+    variety = models.ForeignKey(
+        "Variety", 
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
     density = models.ForeignKey("Density", on_delete=models.CASCADE, null=True)
-    culture = models.ForeignKey("Culture", on_delete=models.CASCADE, null=True)
+    culture = models.ForeignKey(
+        "Culture", 
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
     texture = models.ForeignKey("Texture", on_delete=models.CASCADE, null=True)
     irrigation = models.ForeignKey("Irrigation", on_delete=models.CASCADE, null=True)
     # added fields
@@ -103,7 +124,10 @@ class Task(TimeStampedModel, Model):
     state_district_ar = models.CharField(max_length=100, blank=True, null=True)
     county_ar = models.CharField(max_length=100, blank=True, null=True)
     postcode_ar = models.CharField(max_length=100, blank=True, null=True)
-    intensification_variety = models.ForeignKey("Variety", on_delete=models.CASCADE, null=True, blank=True, related_name="intensification_variety")
+    #intensification_variety = models.ForeignKey("Variety", on_delete=models.CASCADE, null=True, blank=True, related_name="intensification_variety")
+    intensification_variety = models.ForeignKey(
+    "Variety", on_delete=models.CASCADE, null=True, blank=True, related_name="intensification_variety"
+)
     intensification_culture = models.ForeignKey("Culture", on_delete=models.CASCADE, null=True, blank=True, related_name="intensification_culture")
     intensification_density = models.ForeignKey("Density", on_delete=models.CASCADE, null=True, blank=True, related_name="intensification_density")
 def task_image_date_upload_path(instance, filename):
@@ -130,7 +154,16 @@ def request_pdf_report_file_path(instance, filename):
     # Construct the upload path based on the task ID
     return f"pdf_report_files/{instance.user.id}/{custom_filename}"
 
-
+#added
+class Variety(TimeStampedModel, Model):
+    culture = models.ForeignKey(
+        "Culture",
+        on_delete=models.CASCADE,
+        related_name='varieties'  # Add related name
+    )
+    name_en = models.CharField(max_length=50, null=False, blank=False)
+    name_fr = models.CharField(max_length=50, null=False, blank=False)
+    name_ar = models.CharField(max_length=50, null=False, blank=False)
 class TaskImage(TimeStampedModel, Model):
     task = models.ForeignKey("Task", on_delete=models.CASCADE)
     date = models.DateTimeField(default=None, null=True)
@@ -210,7 +243,9 @@ class Culture(TimeStampedModel, Model):
     name_en = models.CharField(max_length=50, null=False, blank=False)
     name_fr = models.CharField(max_length=50, null=False, blank=False)
     name_ar = models.CharField(max_length=50, null=False, blank=False)
-    categorie = models.ForeignKey(CultureCategories, on_delete=models.CASCADE, null=True, blank=True)
+    #categorie = models.ForeignKey(CultureCategories, on_delete=models.CASCADE, null=True, blank=True)
+    categorie = models.ForeignKey("CultureCategories", on_delete=models.CASCADE, null=True, blank=True)
+
 
 
 class Texture(TimeStampedModel, Model):
@@ -225,11 +260,7 @@ class Irrigation(TimeStampedModel, Model):
     name_ar = models.CharField(max_length=50, null=False, blank=False)
 
 
-class Variety(TimeStampedModel, Model):
-    culture = models.ForeignKey("Culture", on_delete=models.CASCADE)
-    name_en = models.CharField(max_length=50, null=False, blank=False)
-    name_fr = models.CharField(max_length=50, null=False, blank=False)
-    name_ar = models.CharField(max_length=50, null=False, blank=False)
+
 
 
 class Density(TimeStampedModel, Model):
@@ -510,6 +541,8 @@ class Pattern(TimeStampedModel, Model):
 
     startdate = models.DateTimeField(default=None, null=True)
     enddate = models.DateTimeField(default=None, null=True)
+
+
 
 
 class Alert(TimeStampedModel, Model):

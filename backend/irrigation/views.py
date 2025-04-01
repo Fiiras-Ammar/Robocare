@@ -4,7 +4,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from django.conf import settings
-
+from django.core.exceptions import FieldError
 from rest_framework import status
 
 from .utils.et0_data import get_et0_data

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import "../assets/css/signupStyle.css";
+import "../assets/css/login.css";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import logo from "../assets/images/logo_login.png";
-// import Card from "react-bootstrap/Card";
+import image from "../assets/images/crop.b3a902767e85f1b371c1.png";
 import { Card } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
@@ -27,6 +27,9 @@ import { TextField } from "@mui/material";
 import { showSnackbar } from "../actions/snackbar";
 import { useTranslation } from "react-i18next";
 import LoadingButton from "@mui/lab/LoadingButton";
+import { useTheme, useMediaQuery } from '@mui/material';
+import GoogleAuth from '../components/auth/GoogleAuth';
+import FacebookAuth from '../components/auth/FacebookAuth';
 
 const Signup = () => {
   const [value, setValue] = useState(null);
@@ -37,6 +40,8 @@ const Signup = () => {
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleClickShowRePassword = () => setShowRePassword((show) => !show);
   const { t } = useTranslation();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
@@ -85,14 +90,15 @@ const Signup = () => {
   const navigate = useNavigate();
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  const onPhoneChange = (phone) => setFormData({ ...formData, phone }); // Update the phone value separately
+  const onPhoneChange = (phone) => setFormData({ ...formData, phone });
   const [loadingbtn, setLoadingbtn] = useState(false);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
   const onSubmit = (e) => {
     setLoadingbtn(true);
     e.preventDefault();
     if (password === re_password) {
-      const phoneValue = phone || ""; // Set phoneValue to either the provided phone or an empty string
+      const phoneValue = phone || "";
 
       dispatch(signup(
         firstname,
@@ -163,46 +169,45 @@ const Signup = () => {
       document.body.classList.remove("background-body");
     };
   });
+
   return (
-    <Container className="sign-up-container auth-container">
-      <Loading />
-      <Row>
-        <div className="d-flex justify-content-center col-12">
-          <div className="col-md-4 text-center mb-3">
-            <img src={logo} alt="logo" style={{ width: "100%" }} />
-          </div>
+    <div className="login-page-container">
+      <div className="login-content">
+        <div className="left-block-login">
+          <h2 className="slogan">
+            {t("Join the Future of Smart Agriculture")}
+          </h2>
+          <img src={image} alt="Signup" className="login-image" />
+          <Button
+            component="a"
+            href="https://www.robocare.tn/"
+            target="_blank"
+            className="learn-more-btn"
+          >
+            {t("Learn More")}
+          </Button>
         </div>
-        {accountCreated ? (
-          <>
-            <div className="col-md-12">
-              {/*<Alert variant="success">
-                {t(
-                  "An email has been sent to your inbox with instructions to activate your account.Please check your email and follow the instructions to complete the process.If you don't receive an email from us within the next few minutes, please check your spam folder or quote our support team for assistance."
-                )}
-              </Alert>*/}
-              <Alert variant="success">
-                {t(
+        <div className="right-block-login">
+          <div className="form-wrapper">
+            <div className="logo-container">
+              <img src={logo} alt="logo" className="login-logo" />
+            </div>
+            {accountCreated ? (
+              <>
+                <Alert variant="success">
+                  {t(
                     "An email has been sent to your inbox with instructions to confirm your account.Please check your email and follow the instructions to complete the process.If you don't receive an email from us within the next few minutes, please check your spam folder or quote our support team for assistance."
-                )}
-              </Alert>
-            </div>
-            <div className="col-md-12">
-              <div className="mt-2 signup-p d-flex justify-content-center">
-                <Link to="/" className="btn btn-login btn btn-primary m-2">
-                  {t("Return Home")}
-                </Link>
-              </div>
-            </div>
-          </>
-        ) : (
-          <div className="justify-content-center col-12 card-login ">
-            <Card className="col-sm-12 right-block-login">
-              <Form
-                onSubmit={(e) => onSubmit(e)}
-                className="text-center mb-2 container"
-              >
-                {/*<h1>{t("Sign up")}</h1>*/}
-                <h3>{t("Fill out this form to start your free trial!")} </h3>
+                  )}
+                </Alert>
+                <div className="mt-4 text-center">
+                  <Link to="/" className="btn btn-login btn-primary">
+                    {t("Return Home")}
+                  </Link>
+                </div>
+              </>
+            ) : (
+              <Form onSubmit={(e) => onSubmit(e)} className="text-center">
+                <h3>{t("Fill out this form to start your free trial!")}</h3>
                 <Row>
                   <div className="col-md-6 mb-4">
                     <FormControl
@@ -368,42 +373,52 @@ const Signup = () => {
                     </FormControl>
                   </div>
                 </Row>
-                <Row className="mb-3 mt-3">
-                  {/* <div className="col-md-6 signup-checkbox">
-                                        <input id="signupCheckbox" type="checkbox" name="condition" style={{ marginRight: "5px" }} />
-                                        <label className="label-signupCheckbox" htmlFor="signupCheckbox">I have read and agreed to the <a href="#" className="terms-link">Terms of service</a></label>
-                                    </div> */}
-                </Row>
                 <Row className="justify-content-center">
-                  <div className="col-sm-6">
-                    {/* <Button style={{ width: '100%' }} className="btn btn-login" type="submit">{t("Sign up")}</Button> */}
+                  <div className="col-12">
                     <LoadingButton
-                      sx={btnSX}
+                      sx={{
+                        ...btnSX,
+                        width: '100%',
+                        paddingRight: '0',
+                        paddingLeft: '0',
+                      }}
                       size="small"
                       type="submit"
                       loading={loadingbtn}
                       loadingPosition="start"
                       variant="contained"
                     >
-                      {/*<span>{t("Sign up")}</span>*/}
                       <span>{t("Start free trial")}</span>
                     </LoadingButton>
                   </div>
                 </Row>
+
+                <div className="social-auth-section">
+                  <div className="or-separator">
+                    <div className="divider"></div>
+                    <span className="or-text">{t('or')}</span>
+                    <div className="divider"></div>
+                  </div>
+                  <div className="social-buttons-container">
+                    <FacebookAuth handleFacebookSignIn={() => {}} />
+                    <GoogleAuth handleGoogleSignIn={() => {}} />
+                  </div>
+                </div>
+
+                <div className="mt-3">
+                  <p className="signup-p">
+                    {t("Already registered?")}{" "}
+                    <Link to="/" className="signin-link">
+                      {t("Sign in here")}
+                    </Link>
+                  </p>
+                </div>
               </Form>
-              <div className="col-sm-12 text-center">
-                <p className="mt-2 signup-p">
-                  {t("Already registered?")}{" "}
-                  <Link to="/" className="signin-link">
-                    {t("Sign in here")}
-                  </Link>
-                </p>
-              </div>
-            </Card>
+            )}
           </div>
-        )}
-      </Row>
-    </Container>
+        </div>
+      </div>
+    </div>
   );
 };
 

@@ -46,7 +46,7 @@ export const handleGoogleSignIn = async (idToken) => {
     // Secure token storage
     if (response.data.access && response.data.refresh) {
       localStorage.setItem('access', response.data.access);
-      sessionStorage.setItem('refresh', response.data.refresh);  // More secure
+      sessionStorage.setItem('refresh', response.data.refresh);
       
       // Set axios default headers
       axiosInstance.defaults.headers.common['Authorization'] = 
@@ -156,13 +156,28 @@ export const refreshToken = () => async (dispatch) => {
   };
 
   try {
+    const refreshToken = sessionStorage.getItem("refresh");
+    if (!refreshToken) {
+      dispatch(logout());
+      return Promise.reject();
+    }
+
     const res = await axiosInstance.post(
       `${process.env.REACT_APP_API_URL}/auth/jwt/refresh/`,
-      { refresh: localStorage.getItem("refresh") },
+      { refresh: refreshToken },
       config
     );
 
-    localStorage.setItem("access", res.data.access);
+    if (res.data.access) {
+      localStorage.setItem("access", res.data.access);
+      axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${res.data.access}`;
+      
+      // Update refresh token if provided
+      if (res.data.refresh) {
+        sessionStorage.setItem("refresh", res.data.refresh);
+      }
+    }
+    
     return Promise.resolve();
     
   } catch (err) {
@@ -206,7 +221,7 @@ export const load_user = () => async (dispatch) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `JWT ${access}`, // Keep JWT prefix
+      Authorization: `Bearer ${access}`,
       Accept: "application/json",
     },
   };
@@ -250,10 +265,16 @@ export const login = (email, password, remember) => async (dispatch) => {
   try {
     const body = JSON.stringify({ email, password });
     const res = await axiosInstance.post(
-      `${process.env.REACT_APP_API_URL}/auth/jwt/create/`, // Fixed environment variable
+      `${process.env.REACT_APP_API_URL}/auth/jwt/create/`,
       body,
       config
     );
+
+    if (res.data.access && res.data.refresh) {
+      localStorage.setItem('access', res.data.access);
+      sessionStorage.setItem('refresh', res.data.refresh);
+      axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${res.data.access}`;
+    }
 
     dispatch({
       type: CONST_LOGIN_SUCCESS,

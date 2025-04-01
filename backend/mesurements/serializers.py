@@ -222,8 +222,21 @@ class UpdateProjectByDeletedTaskSerializer(serializers.ModelSerializer):
 
 
 class PdfReportSerializer(serializers.ModelSerializer):
-    created = serializers.SerializerMethodField()
-    modified = serializers.SerializerMethodField()
+    class Meta:
+        model = PdfReport
+        fields = [
+            'id',
+            'file_path',
+            'created',  # Direct field access
+            'modified', # Direct field access
+            'parameters'
+        ]
+        read_only_fields = ['created', 'modified']
+
+    def validate_file_path(self, value):
+        if not value.name.endswith('.pdf'):
+            raise serializers.ValidationError("Only PDF files are allowed")
+        return value
 
     def get_created(self, instance):
         return instance.created.strftime("%d %b %Y")

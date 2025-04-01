@@ -10,6 +10,8 @@ import math
 from openpyxl import Workbook
 from django.db.models import F
 from django.db.models import Q
+from rest_framework.permissions import IsAuthenticated
+from django.core.exceptions import FieldError
 
 import ee
 from authentification.models import UserAccount
@@ -2095,79 +2097,75 @@ def getPng(request, taskid):
 
 
 @api_view(["GET"])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def getClientStatistics(request):
     if request.user.is_authenticated:
-        fields = [f.name for f in Task._meta.fields]
-        fields.remove("area_of_interest")
+        try:
+            # 1. Fix user reference
+            allTasks = Task.objects.filter(project__user=request.user)  # Use direct user reference
+            
+            # 2. Handle empty surface values
+            totalSurface = sum(
+                float(task.surface) 
+                for task in allTasks 
+                if task.surface is not None
+            )
 
-        allTasks = Task.objects.filter(project__user__email=request.user.email)
-        allReports = PdfReport.objects.filter(user=request.user)
-        serializer = PdfReportSerializer(allReports, many=True)
+            # 3. Add null checks for relationships
+            varieties_dict = {}
+            cultures_dict = {}
 
-        # Dictionnaires pour regrouper les variétés et cultures
-        varieties_dict = {}
-        cultures_dict = {}
+            for task in allTasks:
+                # Handle variety
+                if task.variety:  # Null check
+                    variety = task.variety
+                    varieties_dict[variety.id] = varieties_dict.get(variety.id, {
+                        "variety_id": variety.id,
+                        "names": {
+                            "en": variety.name_en,
+                            "fr": variety.name_fr,
+                            "ar": variety.name_ar
+                        },
+                        "surface": 0.0
+                    })
+                    varieties_dict[variety.id]["surface"] += float(task.surface) if task.surface else 0.0
 
-        totalSurface = 0
+                # Handle culture
+                if task.culture:  # Null check
+                    culture = task.culture
+                    cultures_dict[culture.id] = cultures_dict.get(culture.id, {
+                        "culture_id": culture.id,
+                        "names": {
+                            "en": culture.name_en,
+                            "fr": culture.name_fr,
+                            "ar": culture.name_ar
+                        },
+                        "surface": 0.0
+                    })
+                    cultures_dict[culture.id]["surface"] += float(task.surface) if task.surface else 0.0
 
-        for task in allTasks:
-            totalSurface += task.surface
+            # 4. Fix report serialization
+            allReports = PdfReport.objects.filter(user=request.user)
+            serializer = PdfReportSerializer(allReports, many=True)
 
-            # Regroupement des variétés
-            variety_id = task.variety.id
-            if variety_id not in varieties_dict:
-                varieties_dict[variety_id] = {
-                    "variety_id": variety_id,
-                    "variety_name_en": task.variety.name_en,
-                    "variety_name_fr": task.variety.name_fr,
-                    "variety_name_ar": task.variety.name_ar,
-                    "surface": task.surface
-                }
-            else:
-                varieties_dict[variety_id]["surface"] += task.surface
+            data = {
+                "last_login": request.user.last_login.strftime("%b %d, %Y %H:%M") if request.user.last_login else None,
+                "full_name": f"{request.user.firstname} {request.user.lastname}",
+                "surface": totalSurface,
+                "varieties": list(varieties_dict.values()),
+                "cultures": list(cultures_dict.values()),
+                "reports": serializer.data
+            }
 
-            # Regroupement des cultures
-            culture_id = task.culture.id
-            if culture_id not in cultures_dict:
-                cultures_dict[culture_id] = {
-                    "culture_id": culture_id,
-                    "culture_name_en": task.culture.name_en,
-                    "culture_name_fr": task.culture.name_fr,
-                    "culture_name_ar": task.culture.name_ar,
-                    "cultureSurface": task.surface
-                }
-            else:
-                cultures_dict[culture_id]["cultureSurface"] += task.surface
+            return Response({"message": "Success", "data": data}, status=200)
 
-        # Convertir les dictionnaires en listes
-        varieties = list(varieties_dict.values())
-        cultures = list(cultures_dict.values())
-
-        data = {
-            "last_login": request.user.last_login.strftime("%b %d, %Y %H:%M"),
-            "full_name": f"{request.user.firstname} {request.user.lastname}",
-            "surface": totalSurface,
-            "varieties": varieties,
-            "cultures": cultures,
-            "reports": serializer.data
-        }
-
-        return Response(
-            {
-                "message": "get statistics successfully",
-                "data": data,
-            },
-            status=status.HTTP_200_OK,
-        )
+        except FieldError as e:
+            return Response({"error": f"Field error: {str(e)}"}, status=400)
+        except Exception as e:
+            print(f"Server Error: {str(e)}")  # Log the error
+            return Response({"error": "Internal server error"}, status=500)
     else:
-        return Response(
-            {
-                "message": "you need to login first",
-                "data": {},
-            },
-            status=status.HTTP_401_UNAUTHORIZED,
-        )
+        return Response({"error": "Unauthorized"}, status=401)
 
 
 @api_view(["GET"])

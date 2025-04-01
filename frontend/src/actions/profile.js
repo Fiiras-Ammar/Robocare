@@ -246,9 +246,29 @@ export const getStatistics = (user) => async dispatch => {
     }
     try {
         const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/statistics/`, config);
-        return res
+        return res;
     } catch (err) {
-        return err
+        // Log the full error response to the console
+        if (err.response) {
+            // If the error response exists, log it
+            console.error("Error response from API:", err.response);
+            console.error("Status:", err.response.status);
+            console.error("Headers:", err.response.headers);
+            console.error("Data:", err.response.data);
+        } else if (err.request) {
+            // If the request was made but no response was received
+            console.error("No response received from API:", err.request);
+        } else {
+            // If an error occurred in setting up the request
+            console.error("Error in setting up the request:", err.message);
+        }
+
+        // Optionally dispatch an action to handle the error state
+        dispatch({
+            type: LOAD_USER_FAIL
+        });
+
+        return err;
     }
 }
 
@@ -257,7 +277,7 @@ export const update_language = (data) => async dispatch => {
         const config = {
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': ` Bearer${localStorage.getItem('access')}`,
+                'Authorization': `Bearer ${localStorage.getItem('access')}`,
                 'Accept': 'application/json'
             }
         };
@@ -269,6 +289,7 @@ export const update_language = (data) => async dispatch => {
         }
     }
 }
+
 
 export const get_user_language = (userId) => async dispatch => {
     if (localStorage.getItem('access')) {

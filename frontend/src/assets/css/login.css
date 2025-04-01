@@ -19,6 +19,7 @@ html, body {
   justify-content: center;
   align-items: center;
   padding: 20px;
+  box-sizing: border-box;
 }
 
 .login-content {
@@ -33,13 +34,60 @@ html, body {
 }
 
 .left-block-login {
+  flex: 1;
   background: #f9fafb;
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  position: relative;
+}
+
+.left-block-login .login-image {
+  width: 100%;
+  max-width: 600px;
+  height: 450px;
+  object-fit: contain;
+  margin: 2rem 0;
+}
+
+.left-block-login .slogan {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1b3218;
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+  line-height: 1.4;
+}
+
+.left-block-login .learn-more-btn {
+  background-color: #6f9d2f;
+  color: white;
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-weight: 500;
+  text-transform: none;
+  transition: all 0.3s ease;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.left-block-login .learn-more-btn:hover {
+  background-color: #618a27;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
 
 .right-block-login {
+  flex: 1;
   padding: 2rem;
   box-shadow: 0 0 20px rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .form-wrapper {
@@ -47,61 +95,20 @@ html, body {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 400px; 
+  max-width: 400px;
+  padding: 0 1rem;
+  box-sizing: border-box;
 }
 
 .logo-container {
   text-align: center;
   margin-bottom: 2rem;
+  width: 100%;
 }
 
-.social-buttons {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-/* *** Add these new styles for social buttons *** */
-
-
-
-
-.social-icon-container {
-  width: 40px;
-  height: 40px;
-  background-color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 8px;
-}
-
-.social-icon {
-  width: 32px;
-  height: 32px;
-}
-
-
-
-.or-separator {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin: 1.5rem 0;
-}
-
-.divider {
-  flex: 1;
-  border-color: #ddd;
-  margin-top: 0;
-}
-
-.form-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 1rem 0;
+.logo-container img {
+  max-width: 200px;
+  height: auto;
 }
 
 .login-btn {
@@ -127,68 +134,53 @@ html, body {
   color: #4f9a44 !important;
 }
 
-.slogon {
-  font-size: 22px;
+@media screen and (max-width: 1200px) {
+  .login-content {
+    height: 90vh;
+  }
+  
+  .left-block-login .login-image {
+    max-width: 500px;
+    height: 375px;
+  }
 }
 
-.btn-learn-more {
-  border-color: #979797 !important;
-  background-color: #ffffff !important;
-  color: #444444 !important;
-  border: 1px solid;
-}
-
-.btn-learn-more:hover {
-  background-color: #d6d6d6 !important;
-  color: #444444 !important;
-}
-/* Add to your CSS */
-.google-btn {
-  background: #4285f4;
-  color: white;
-  text-transform: none;
-  padding: 8px 16px;
-}
-
-.google-btn:hover {
-  background: #357abd;
-}
-
-.google-btn img {
-  background: white;
-  padding: 8px;
-  border-radius: 3px;
-  margin-right: 15px;
+@media screen and (max-width: 992px) {
+  .login-content {
+    height: 95vh;
+  }
+  
+  .left-block-login .login-image {
+    max-width: 400px;
+    height: 300px;
+  }
+  
+  .left-block-login .slogan {
+    font-size: 20px;
+  }
 }
 
 @media screen and (max-width: 767px) {
+  .login-content {
+    height: 100vh;
+    border-radius: 0;
+  }
+  
   .left-block-login {
     display: none !important;
   }
   
   .right-block-login {
     width: 100%;
+    padding: 1rem;
+    box-shadow: none;
   }
   
-  .login-logo {
-    width: 180px !important;
-  }
-  
-  .social-buttons {
-    flex-direction: column;
-  }
-
-  .social-btn {
-    width: 40px;
-    height: 40px;
+  .form-wrapper {
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    border: none;
   }
-
+  
+  .logo-container img {
+    max-width: 180px;
+  }
 }

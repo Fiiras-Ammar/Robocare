@@ -20,6 +20,7 @@ import logging
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from django.contrib.auth import get_user_model
+from django.core.exceptions import FieldError
 
 logger = logging.getLogger(__name__)
 User = get_user_model()

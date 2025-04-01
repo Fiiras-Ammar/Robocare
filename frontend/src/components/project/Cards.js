@@ -1,11 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 
-import { CardContent, Box, Grid } from "@mui/material";
+import { CardContent, Box, Grid, Pagination } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { Pagination } from "@mui/lab";
 import Typography from "@mui/material/Typography";
 import "../../assets/scss/cards.scss";
 import "../../assets/css/card.css";
@@ -40,7 +39,6 @@ import {useNavigate} from "react-router-dom";
 
 const Cards = ({}) => {
     const [projects, setProjects] = useState([]);
-    //   const [selectedProject, setSelectedProject] = useState(-1);
     const [allTasksList, setAllTasksList] = useState([]);
     const navigate = useNavigate();
 
@@ -53,7 +51,8 @@ const Cards = ({}) => {
 
     const { t } = useTranslation();
 
-    const userId = useSelector((state) => state.auth.user.id);
+    const user = useSelector((state) => state.auth.user);
+    const userId = user?.id;
     const selectedProject = useSelector(
         (state) => state.selectedProjectReducer.projectIndex
     );
@@ -80,11 +79,8 @@ const Cards = ({}) => {
     const [itemsPerPage, setItemsPerPage] = useState(5);
 
     useEffect(() => {
-        if (!userId) return;
-        // const savedSelectedProject = localStorage.getItem("selectedProject");
-        // setSelectedProject(
-        //   savedSelectedProject ? parseInt(savedSelectedProject) : -1
-        // );
+        if (!user || !userId) return;
+        
         dispatch(check_staff(userId)).then((response) => {
             if (response.status == 200) {
                 setisStaff(response.data["staff"]);
@@ -130,35 +126,40 @@ const Cards = ({}) => {
             setAllTasksList(response)
         });
 
-        }, [userId]);
+    }, [user, userId, dispatch, t]);
+
     useEffect(() => {
         if (!isStaff) return;
         dispatch(sum_clients()).then((response) => {
             setsumClients(response.data.data["users"]);
             setsumClientsPercent(response.data.data["last_month"]);
         });
-    }, [isStaff]);
+    }, [isStaff, dispatch]);
+
     useEffect(() => {
         if (!isStaff) return;
         dispatch(sum_area()).then((response) => {
             setsumArea(response.data.data["total_surface"]);
             setsumAreaPercent(response.data.data["last_month_surface"]);
         });
-    }, [isStaff]);
+    }, [isStaff, dispatch]);
+
     useEffect(() => {
         if (!isStaff) return;
         dispatch(sum_sensors()).then((response) => {
             setsumSernsor(response.data.data["total_sensor"]);
             setsumSernsorPercent(response.data.data["last_month_sensor"]);
         });
-    }, [isStaff]);
+    }, [isStaff, dispatch]);
+
     useEffect(() => {
         if (!isStaff) return;
         dispatch(sum_tasks()).then((response) => {
             setsumTask(response.data.data["total_task"]);
             setsumTaskPercent(response.data.data["last_month"]);
         });
-    }, [isStaff]);
+    }, [isStaff, dispatch]);
+
     useEffect(() => {
         if (projects.length === 0) return;
         if (selectedProject >= 0) {
@@ -167,7 +168,8 @@ const Cards = ({}) => {
         } else {
             setTasks(allTasks);
         }
-    }, [projects, selectedProject]);
+    }, [projects, selectedProject, allTasks]);
+
     useEffect(() => {
         const initialPagination = {};
         projects.forEach((project) => {
@@ -179,20 +181,21 @@ const Cards = ({}) => {
     const handleOpenAddModal = () => {
         setAddModalOpen(true);
     };
+
     const handleCloseAddModal = () => {
         setAddModalOpen(false);
     };
+
     const handleOpenAddTaskModal = () => {
         setmodalOpenAddTask(true);
     };
+
     const handleCloseAddTaskModal = () => {
         setmodalOpenAddTask(false);
     };
 
     const handleChange = (e) => {
         const value = parseInt(e.target.value);
-        // setSelectedProject(value);
-        // localStorage.setItem("selectedProject", value.toString());
         if (value >= 0) {
             const project = projects[value];
             setTasks(project.tasks);
@@ -204,30 +207,29 @@ const Cards = ({}) => {
             payload: e.target.value,
         });
     };
+
     const handleSelectField = (e) => {
         const selectedId = e.target.value;
         if (selectedId !== "-1") {
-            //const redirectUrl = `${process.env.REACT_APP_API_URL}/task/detail/${selectedId}`;
             navigate(`/task/detail/${selectedId}`);
         } else {
             console.log("No project selected");
         }
     };
 
-
-
-
     const handleTasksToShowChange = (e) => {
         const value = parseInt(e.target.value);
         setItemsPerPage(value);
         setCurrentPage(1);
     };
+
     const handleProjectTaskPageChange = (projectId, newPage) => {
         setProjectPagination((prev) => ({
             ...prev,
             [projectId]: { ...prev[projectId], currentPage: newPage },
         }));
     };
+
     const handlePageChange = (event, value) => {
         setCurrentPage(value);
     };
@@ -239,6 +241,7 @@ const Cards = ({}) => {
                 (project) => project && project.tasks && project.tasks.length > 0
             );
     }, [projects, selectedProject]);
+
     const memoizedProjects = useMemo(() => {
         const filteredProjects =
             selectedProject >= 0 ? [projects[selectedProject]] : projects;
@@ -249,49 +252,11 @@ const Cards = ({}) => {
             .map((project) => {
                 const { currentPage } = projectPagination[project.id] || {
                     currentPage: 1,
-                    itemsPerPage: 4,
                 };
-                const paginatedTasks = project.tasks.slice(
-                    (currentPage - 1) * 8,
-                    currentPage * 8
-                );
-
-                return (
-                    <Grid item xs={12} key={`project-container-${project.id}`}>
-                        <Card>
-                            <CardContent>
-                                <Typography variant="h5" component="div">
-                                    {project.project_name} ({project.tasks.length} {t("tasks")} / {project.surface} {t("Ha")})
-                                </Typography>
-                                <Grid container spacing={2}>
-                                    {paginatedTasks.map((task) => (
-                                        <Grid
-                                            item
-                                            xs={12}
-                                            sm={6}
-                                            md={3}
-                                            key={`task-container-${project.id}-${task.id}`}
-                                        >
-                                            <ImgMediaCard
-                                                element={task}
-                                                key={`task-${project.id}-${task.id}`}
-                                            />
-                                        </Grid>
-                                    ))}
-                                </Grid>
-
-                                <Pagination
-                                    count={Math.ceil(project.tasks.length / 8)}
-                                    page={currentPage}
-                                    onChange={(event, value) =>
-                                        handleProjectTaskPageChange(project.id, value)
-                                    }
-                                    sx={{ mt: 2, display: "flex", justifyContent: "center" }}
-                                />
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                );
+                return {
+                    ...project,
+                    currentPage,
+                };
             });
     }, [projects, selectedProject, currentPage, itemsPerPage, projectPagination]);
 
@@ -590,7 +555,45 @@ const Cards = ({}) => {
                     </Grid>
                 ) : projectsToShow.length > 0 ? (
                     <>
-                        {memoizedProjects}
+                        {memoizedProjects.map((project) => (
+                            <Grid item xs={12} key={`project-container-${project.id}`}>
+                                <Card>
+                                    <CardContent>
+                                        <Typography variant="h5" component="div">
+                                            {project.project_name} ({project.tasks.length} {t("tasks")} / {project.surface} {t("Ha")})
+                                        </Typography>
+                                        <Grid container spacing={2}>
+                                            {project.tasks.slice(
+                                                (project.currentPage - 1) * 8,
+                                                project.currentPage * 8
+                                            ).map((task) => (
+                                                <Grid
+                                                    item
+                                                    xs={12}
+                                                    sm={6}
+                                                    md={3}
+                                                    key={`task-container-${project.id}-${task.id}`}
+                                                >
+                                                    <ImgMediaCard
+                                                        element={task}
+                                                        key={`task-${project.id}-${task.id}`}
+                                                    />
+                                                </Grid>
+                                            ))}
+                                        </Grid>
+
+                                        <Pagination
+                                            count={Math.ceil(project.tasks.length / 8)}
+                                            page={project.currentPage}
+                                            onChange={(event, value) =>
+                                                handleProjectTaskPageChange(project.id, value)
+                                            }
+                                            sx={{ mt: 2, display: "flex", justifyContent: "center" }}
+                                        />
+                                    </CardContent>
+                                </Card>
+                            </Grid>
+                        ))}
                         {selectedProject === -1 && itemsPerPage !== -1 && (
                             <Grid item xs={12}>
                                 <Pagination
